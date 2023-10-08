@@ -1,3 +1,5 @@
+[Leer en Español](README_es.md)
+
 # Medical_Assistant
 
 A comprehensive Android application designed to bridge interactions between patients and doctors in a clinical setting through voice recognition and emotion detection technologies.
