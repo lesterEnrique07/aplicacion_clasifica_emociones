@@ -50,5 +50,5 @@ Contributions are welcome! Please read the contributing guideline to get started
 
 ## License
 
-[License Name](LICENCE)
+[MIT Licence](LICENCE)
 
