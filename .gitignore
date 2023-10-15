@@ -1,50 +1,45 @@
-*.iml
-.gradle
-/local.properties
-/.idea/workspace.xml
-/.idea/libraries
-.DS_Store
-/build
-/captures
-.externalNativeBuild
-.idea
-/app/release
-/app/debug/
+# built application files
+*.apk
+*.ap_
 
-# Built application files
-/*/build/
+# files for the dex VM
+*.dex
 
-# Crashlytics configuations
-com_crashlytics_export_strings.xml
+# Java class files
+*.class
+
+# generated files
+bin/
+gen/
+out/
+build/
 
 # Local configuration file (sdk path, etc)
 local.properties
 
-# Gradle generated files
-.gradle/
+# Eclipse project files
+.classpath
+.project
 
-# Signing files
-.signing/
+# Windows thumbnail db
+.DS_Store
 
-# User-specific configurations
-.idea/libraries/
-.idea/workspace.xml
-.idea/tasks.xml
-.idea/.name
-.idea/compiler.xml
-.idea/copyright/profiles_settings.xml
-.idea/encodings.xml
-.idea/misc.xml
-.idea/modules.xml
-.idea/scopes/scope_settings.xml
-.idea/vcs.xml
+# IDEA/Android Studio project files, because
+# the project can be imported from settings.gradle.kts
+*.iml
+.idea/*
+!.idea/copyright
+# Keep the code styles.
+!/.idea/codeStyles
+/.idea/codeStyles/*
+!/.idea/codeStyles/Project.xml
+!/.idea/codeStyles/codeStyleConfig.xml
 
-# OS-specific files
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
-/keystore.properties
-/.vscode/settings.json
+# Gradle cache
+.gradle
+
+# Sandbox stuff
+_sandbox
+
+# Android Studio captures folder
+captures/
