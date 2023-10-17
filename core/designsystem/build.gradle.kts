@@ -1,4 +1,3 @@
-
 plugins {
     alias(libs.plugins.medicalassist.android.library)
     alias(libs.plugins.medicalassist.android.library.compose)
@@ -28,5 +27,5 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.coil.kt.compose)
 
-    //androidTestImplementation(projects.core.testing)
+    androidTestImplementation(projects.core.testing)
 }

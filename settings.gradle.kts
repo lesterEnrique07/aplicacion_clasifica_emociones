@@ -34,21 +34,30 @@ rootProject.name = "medical-assistant"
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 include(":app")
-include(":core:analytics")
-include(":core:designsystem")
-include(":core:ui")
-include(":core:testing")
-/*
-include(":benchmarks")
 include(":core:common")
-include(":core:data")
-include(":core:data-test")
-include(":core:database")
+include(":core:analytics")
 include(":core:datastore")
 include(":core:datastore-test")
+include(":core:data")
+include(":core:data-test")
+include(":core:designsystem")
+include(":core:ui")
+include(":core:model")
+include(":core:testing")
+
+include(":feature:settings")
+
+/*
+include(":benchmarks")
+
+
+
+include(":core:database")
+
+
 
 include(":core:domain")
-include(":core:model")
+
 include(":core:network")
 
 
@@ -60,7 +69,7 @@ include(":feature:interests")
 include(":feature:bookmarks")
 include(":feature:topic")
 include(":feature:search")
-include(":feature:settings")
+
 include(":lint")
 include(":sync:work")
 include(":sync:sync-test")

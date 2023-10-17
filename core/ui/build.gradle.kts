@@ -1,4 +1,3 @@
-
 plugins {
     alias(libs.plugins.medicalassist.android.library)
     alias(libs.plugins.medicalassist.android.library.compose)
@@ -27,10 +26,12 @@ dependencies {
     debugApi(libs.androidx.compose.ui.tooling)
 
     implementation(projects.core.analytics)
-    /*
     implementation(projects.core.designsystem)
+    implementation(projects.core.model)
+    /*
+
     implementation(projects.core.domain)
-    implementation(projects.core.model)*/
+    */
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.browser)
     implementation(libs.androidx.core.ktx)
@@ -38,5 +39,5 @@ dependencies {
     implementation(libs.coil.kt.compose)
     implementation(libs.kotlinx.datetime)
 
-    //androidTestImplementation(projects.core.testing)
+    androidTestImplementation(projects.core.testing)
 }

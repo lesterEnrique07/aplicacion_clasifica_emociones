@@ -56,24 +56,23 @@ dependencies {
     implementation(projects.core.ui)
     implementation(projects.core.designsystem)
 
+    implementation(projects.feature.settings)
+
+    implementation(projects.core.common)
+    implementation(projects.core.data)
+    implementation(projects.core.model)
+    implementation(projects.core.analytics)
+    androidTestImplementation(projects.core.datastoreTest)
+    androidTestImplementation(projects.core.dataTest)
+
     /*implementation(projects.feature.interests)
     implementation(projects.feature.foryou)
     implementation(projects.feature.bookmarks)
     implementation(projects.feature.topic)
     implementation(projects.feature.search)
-    implementation(projects.feature.settings)*/
+    */
 
-    /*implementation(projects.core.common)
-
-    implementation(projects.core.data)
-    implementation(projects.core.model)
-    implementation(projects.core.analytics)
-
-    implementation(projects.sync.work)
-
-
-    androidTestImplementation(projects.core.datastoreTest)
-    androidTestImplementation(projects.core.dataTest)
+    /*implementation(projects.sync.work)
     androidTestImplementation(projects.core.network)*/
     androidTestImplementation(projects.core.testing)
     androidTestImplementation(libs.androidx.navigation.testing)
@@ -99,9 +98,9 @@ dependencies {
 
     // Core functions
     testImplementation(projects.core.testing)
-    /*testImplementation(projects.core.datastoreTest)
+    testImplementation(projects.core.datastoreTest)
     testImplementation(projects.core.dataTest)
-    testImplementation(projects.core.network)*/
+    //testImplementation(projects.core.network)
     testImplementation(libs.androidx.navigation.testing)
     testImplementation(libs.accompanist.testharness)
     testImplementation(libs.work.testing)
