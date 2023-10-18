@@ -1,5 +1,5 @@
 import com.android.build.api.dsl.ApplicationExtension
-import com.xela_dev_mobile.medical_assistant.configureAndroidCompose
+import com.xeladevmobile.medicalassistant.configureAndroidCompose
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.getByType

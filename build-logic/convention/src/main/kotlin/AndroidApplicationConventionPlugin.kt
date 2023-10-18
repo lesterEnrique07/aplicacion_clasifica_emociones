@@ -1,8 +1,8 @@
 import com.android.build.api.dsl.ApplicationExtension
-import com.xela_dev_mobile.medical_assistant.configureGradleManagedDevices
 import com.android.build.api.variant.ApplicationAndroidComponentsExtension
-import com.xela_dev_mobile.medical_assistant.configureKotlinAndroid
-import com.xela_dev_mobile.medical_assistant.configurePrintApksTask
+import com.xeladevmobile.medicalassistant.configureGradleManagedDevices
+import com.xeladevmobile.medicalassistant.configureKotlinAndroid
+import com.xeladevmobile.medicalassistant.configurePrintApksTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure

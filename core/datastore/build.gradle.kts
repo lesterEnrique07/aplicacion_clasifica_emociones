@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 The Android Open Source Project
+ * Copyright 2022 Medical Assistant
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ android {
     defaultConfig {
         consumerProguardFiles("consumer-proguard-rules.pro")
     }
-    namespace = "com.xela_dev_mobile.medical_assistant.core.datastore"
+    namespace = "com.xeladevmobile.medicalassistant.core.datastore"
     testOptions {
         unitTests {
             isReturnDefaultValues = true

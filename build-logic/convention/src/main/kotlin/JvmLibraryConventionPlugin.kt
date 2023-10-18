@@ -1,4 +1,4 @@
-import com.xela_dev_mobile.medical_assistant.configureKotlinJvm
+import com.xeladevmobile.medicalassistant.configureKotlinJvm
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 

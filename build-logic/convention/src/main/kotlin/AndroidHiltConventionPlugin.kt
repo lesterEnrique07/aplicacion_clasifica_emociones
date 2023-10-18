@@ -1,4 +1,4 @@
-import com.xela_dev_mobile.medical_assistant.libs
+import com.xeladevmobile.medicalassistant.libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.dependencies

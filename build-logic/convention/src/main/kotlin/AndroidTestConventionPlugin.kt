@@ -1,6 +1,6 @@
 import com.android.build.gradle.TestExtension
-import com.xela_dev_mobile.medical_assistant.configureGradleManagedDevices
-import com.xela_dev_mobile.medical_assistant.configureKotlinAndroid
+import com.xeladevmobile.medicalassistant.configureGradleManagedDevices
+import com.xeladevmobile.medicalassistant.configureKotlinAndroid
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
