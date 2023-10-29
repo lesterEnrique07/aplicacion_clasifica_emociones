@@ -80,12 +80,8 @@ dependencies {
     androidTestImplementation(projects.core.datastoreTest)
     androidTestImplementation(projects.core.dataTest)
 
-    /*implementation(projects.feature.interests)
-    implementation(projects.feature.foryou)
-    implementation(projects.feature.bookmarks)
-    implementation(projects.feature.topic)
-    implementation(projects.feature.search)
-    */
+    implementation(projects.feature.home)
+    implementation(projects.feature.me)
 
     /*implementation(projects.sync.work)
     androidTestImplementation(projects.core.network)*/

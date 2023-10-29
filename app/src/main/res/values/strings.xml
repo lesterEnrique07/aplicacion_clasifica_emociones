@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
      Copyright 2023 Medical Assistant
 
      Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,4 +15,5 @@
 -->
 <resources>
     <string name="app_name">Medical Assistant</string>
+    <string name="not_connected">Not connected</string>
 </resources>

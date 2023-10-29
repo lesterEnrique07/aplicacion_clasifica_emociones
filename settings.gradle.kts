@@ -45,6 +45,8 @@ include(":core:ui")
 include(":core:model")
 include(":core:testing")
 
+include(":feature:home")
+include(":feature:me")
 include(":feature:settings")
 
 /*
@@ -64,13 +66,9 @@ include(":core:network")
 
 include(":core:notifications")*/
 
-/*include(":feature:foryou")
-include(":feature:interests")
-include(":feature:bookmarks")
-include(":feature:topic")
-include(":feature:search")
-
+/*
 include(":lint")
 include(":sync:work")
 include(":sync:sync-test")
 include(":ui-test-hilt-manifest")*/
+include(":core:database")
