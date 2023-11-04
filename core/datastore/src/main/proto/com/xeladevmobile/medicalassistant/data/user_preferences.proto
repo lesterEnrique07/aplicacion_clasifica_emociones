@@ -45,12 +45,12 @@ message UserPreferences {
   string graduationDate = 14;
   string experience = 15;
   string occupation = 16;
-  UserType user_type = 17;
+  UserTypeProto user_type = 17;
 
   // NEXT AVAILABLE ID: 18
 }
 
-enum UserType {
+enum UserTypeProto {
   DOCTOR = 0;
   PATIENT = 1;
 }

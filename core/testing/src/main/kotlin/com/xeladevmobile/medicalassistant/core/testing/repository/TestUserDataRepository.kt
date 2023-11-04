@@ -20,6 +20,7 @@ import com.xeladevmobile.medicalassistant.core.data.repository.UserDataRepositor
 import com.xeladevmobile.medicalassistant.core.model.data.DarkThemeConfig
 import com.xeladevmobile.medicalassistant.core.model.data.ThemeBrand
 import com.xeladevmobile.medicalassistant.core.model.data.UserData
+import com.xeladevmobile.medicalassistant.core.model.data.UserType
 import kotlinx.coroutines.channels.BufferOverflow.DROP_OLDEST
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -30,6 +31,17 @@ val emptyUserData = UserData(
     darkThemeConfig = DarkThemeConfig.FOLLOW_SYSTEM,
     useDynamicColor = false,
     shouldHideOnboarding = false,
+    address = "123 Main St",
+    bornDate = "01/01/1990",
+    experience = "10 years",
+    graduationDate = "01/01/2010",
+    name = "Jane Doe",
+    occupation = "Doctor",
+    sex = "Feminine",
+    problemDescription = "",
+    specialty = "Cardiologist",
+    treatmentDate = "",
+    userType = UserType.DOCTOR,
 )
 
 class TestUserDataRepository : UserDataRepository {

@@ -17,9 +17,13 @@
 package com.xeladevmobile.medicalassistant.core.datastore
 
 import androidx.datastore.core.DataStore
+import com.xeladevmobile.medicalassistant.core.datastore.UserTypeProto.DOCTOR
+import com.xeladevmobile.medicalassistant.core.datastore.UserTypeProto.PATIENT
+import com.xeladevmobile.medicalassistant.core.datastore.UserTypeProto.UNRECOGNIZED
 import com.xeladevmobile.medicalassistant.core.model.data.DarkThemeConfig
 import com.xeladevmobile.medicalassistant.core.model.data.ThemeBrand
 import com.xeladevmobile.medicalassistant.core.model.data.UserData
+import com.xeladevmobile.medicalassistant.core.model.data.UserType
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
@@ -53,6 +57,20 @@ class MedicalPreferencesDataSource @Inject constructor(
                 },
                 useDynamicColor = it.useDynamicColor,
                 shouldHideOnboarding = it.shouldHideOnboarding,
+                userType = when (it.userType) {
+                    DOCTOR -> UserType.DOCTOR
+                    null, UNRECOGNIZED, PATIENT -> UserType.PATIENT
+                },
+                treatmentDate = it.treatmentDate,
+                specialty = it.specialty,
+                problemDescription = it.problemDescription,
+                sex = it.sex,
+                address = it.address,
+                bornDate = it.bornDate,
+                experience = it.experience,
+                graduationDate = it.graduationDate,
+                name = it.name,
+                occupation = it.occupation,
             )
         }
 
@@ -96,4 +114,86 @@ class MedicalPreferencesDataSource @Inject constructor(
             }
         }
     }
+
+    suspend fun setSex(sex: String) {
+        userPreferences.updateData {
+            it.copy {
+                this.sex = sex
+            }
+        }
+    }
+
+    suspend fun setOccupation(occupation: String) {
+        userPreferences.updateData {
+            it.copy {
+                this.occupation = occupation
+            }
+        }
+    }
+
+    suspend fun setBornDate(bornDate: String) {
+        userPreferences.updateData {
+            it.copy {
+                this.bornDate = bornDate
+            }
+        }
+    }
+
+    suspend fun setExperience(experience: String) {
+        userPreferences.updateData {
+            it.copy {
+                this.experience = experience
+            }
+        }
+    }
+
+    suspend fun setAddress(address: String) {
+        userPreferences.updateData {
+            it.copy {
+                this.address = address
+            }
+        }
+    }
+
+    suspend fun setGraduationDate(graduationDate: String) {
+        userPreferences.updateData {
+            it.copy {
+                this.graduationDate = graduationDate
+            }
+        }
+    }
+
+    suspend fun setName(name: String) {
+        userPreferences.updateData {
+            it.copy {
+                this.name = name
+            }
+        }
+    }
+
+    suspend fun setProblemDescription(problemDescription: String) {
+        userPreferences.updateData {
+            it.copy {
+                this.problemDescription = problemDescription
+            }
+        }
+    }
+
+    suspend fun setSpecialty(specialty: String) {
+        userPreferences.updateData {
+            it.copy {
+                this.specialty = specialty
+            }
+        }
+    }
+
+    suspend fun setTreatmentDate(treatmentDate: String) {
+        userPreferences.updateData {
+            it.copy {
+                this.treatmentDate = treatmentDate
+            }
+        }
+    }
+
+
 }

@@ -4,8 +4,6 @@ import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -17,8 +15,13 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Call
-import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.AssistantDirection
+import androidx.compose.material.icons.filled.AssuredWorkload
+import androidx.compose.material.icons.filled.Directions
+import androidx.compose.material.icons.filled.PersonOutline
+import androidx.compose.material.icons.filled.School
+import androidx.compose.material.icons.filled.WorkOutline
+import androidx.compose.material.icons.filled.WorkspacePremium
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
@@ -26,13 +29,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
@@ -72,75 +71,139 @@ fun ProfileScreen(
 ) {
     when (uiState) {
         ProfileUiState.Loading -> {
-
+            LoadingUser()
         }
 
-        is ProfileUiState.Success -> TODO()
-    }
-
-    var expanded by remember { mutableStateOf(false) }
-    val alpha: Float by animateFloatAsState(if (expanded) 1f else 0.7f, label = "")
-
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(),
-    ) {
-        Column(
-            modifier = Modifier.padding(16.dp),
-        ) {
-            Text(
-                text = "Personal Details",
-                fontStyle = FontStyle.Italic,
-                fontSize = 32.sp,
-                fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.onBackground,
-                modifier = Modifier
-                    .padding(16.dp),
-            )
-
-            Card(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clickable { expanded = !expanded },
-                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+        is ProfileUiState.Success -> {
+            Box(
+                modifier = modifier
+                    .fillMaxSize()
+                    .padding(),
             ) {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(16.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween,
+                Column(
+                    modifier = Modifier.padding(16.dp),
                 ) {
-                    Column {
-                        Text(text = "Jane Doe", fontWeight = FontWeight.Bold, fontSize = 18.sp)
-                        Text(text = "Date of Birth: 01/01/1990")
+                    Text(
+                        text = "Personal Details",
+                        fontStyle = FontStyle.Italic,
+                        fontSize = 32.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.onBackground,
+                        modifier = Modifier
+                            .padding(16.dp),
+                    )
+
+                    Card(
+                        modifier = Modifier
+                            .fillMaxWidth(),
+                        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+                    ) {
                         Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(16.dp),
+                            horizontalArrangement = Arrangement.SpaceBetween,
                             verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.spacedBy(10.dp),
                         ) {
-                            Icon(imageVector = Icons.Default.Call, contentDescription = "Call Icon")
-                            Text(text = "+1234567890")
-                        }
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.spacedBy(10.dp),
-                        ) {
-                            Icon(imageVector = Icons.Default.Email, contentDescription = "Email Icon")
-                            Text(text = "jane.doe@email.com")
+                            Column(
+                                modifier = Modifier
+                                    .weight(0.5f),
+                            ) {
+                                Text(text = uiState.user.name, fontWeight = FontWeight.Bold, fontSize = 18.sp)
+
+                                Row(
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    horizontalArrangement = Arrangement.spacedBy(10.dp),
+                                ) {
+                                    Icon(
+                                        imageVector = Icons.Default.AssuredWorkload,
+                                        contentDescription = "Graduation Date",
+                                    )
+                                    Text(text = "Date of Birth: ${uiState.user.bornDate}")
+                                }
+
+                                Row(
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    horizontalArrangement = Arrangement.spacedBy(10.dp),
+                                ) {
+                                    Icon(imageVector = Icons.Default.School, contentDescription = "Graduation Date")
+                                    Text(text = "Graduation: ${uiState.user.graduationDate}")
+                                }
+
+                                Row(
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    horizontalArrangement = Arrangement.spacedBy(10.dp),
+                                ) {
+                                    Icon(imageVector = Icons.Default.WorkOutline, contentDescription = "Work Icon")
+                                    Text(text = uiState.user.occupation)
+                                }
+
+                                Row(
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    horizontalArrangement = Arrangement.spacedBy(10.dp),
+                                ) {
+                                    Icon(imageVector = Icons.Default.WorkspacePremium, contentDescription = "Work Icon")
+                                    Text(text = uiState.user.specialty)
+                                }
+                            }
+
+                            Image(
+                                painter = painterResource(id = R.drawable.ic_person_placeholder),
+                                contentDescription = "Picture",
+                                modifier = Modifier.size(100.dp),
+                            )
                         }
                     }
 
-                    Box(
+                    Spacer(modifier = Modifier.height(20.dp))
+
+                    Card(
                         modifier = Modifier
-                            .size(100.dp)
-                            .background(Color.Gray, shape = MaterialTheme.shapes.medium),
+                            .fillMaxWidth(),
+                        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
                     ) {
-                        // Replace this with an Image composable for the profile picture
+                        Column(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(16.dp),
+                        ) {
+                            Text(text = "Experience", fontWeight = FontWeight.Bold, fontSize = 18.sp)
+
+                            Spacer(modifier = Modifier.size(8.dp))
+
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.spacedBy(10.dp),
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Default.PersonOutline,
+                                    contentDescription = "Sex",
+                                )
+                                Text(text = "Sex: ${uiState.user.sex}")
+                            }
+
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.spacedBy(10.dp),
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Default.Directions,
+                                    contentDescription = "Address",
+                                )
+                                Text(text = "Address: ${uiState.user.address}")
+                            }
+
+                            Spacer(modifier = Modifier.height(20.dp))
+
+                            ExperienceTextAnimated(
+                                years = uiState.user.experience,
+                            )
+                        }
                     }
+
+                    Spacer(modifier = Modifier.height(20.dp))
                 }
             }
-
-            Spacer(modifier = Modifier.height(20.dp))
         }
     }
 }
@@ -161,14 +224,16 @@ internal fun LoadingUser(modifier: Modifier = Modifier) {
             .padding(16.dp)
             .fillMaxSize()
             .alpha(alpha)
-            .testTag("bookmarks:empty")
+            .testTag("profile:loading")
             .alpha(alpha), // Apply fade-in
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         val iconTint = LocalTintTheme.current.iconTint
         Image(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(200.dp),
             painter = painterResource(id = R.drawable.ic_person_placeholder),
             colorFilter = if (iconTint != null) ColorFilter.tint(iconTint) else null,
             contentDescription = null,
@@ -186,9 +251,51 @@ internal fun LoadingUser(modifier: Modifier = Modifier) {
     }
 }
 
-@Preview
 @Composable
-fun LoadingUser() {
+internal fun ExperienceTextAnimated(
+    modifier: Modifier = Modifier,
+    years: String,
+) {
+    val alpha: Float by animateFloatAsState(
+        targetValue = 1f,
+        animationSpec = tween(
+            durationMillis = 1000,
+            easing = LinearOutSlowInEasing,
+        ),
+        label = "",
+    )
+
+    Column(
+        modifier = modifier
+            .alpha(alpha)
+            .testTag("profile:experience")
+            .alpha(alpha), // Apply fade-in
+        verticalArrangement = Arrangement.Center,
+    ) {
+        val iconTint = LocalTintTheme.current.iconTint
+        Text(
+            modifier = Modifier
+                .fillMaxWidth(),
+            text = years,
+            textAlign = TextAlign.Center,
+            fontSize = 64.sp,
+            color = iconTint ?: MaterialTheme.colorScheme.primary,
+
+        )
+
+        Text(
+            text = "YEARS",
+            modifier = Modifier.fillMaxWidth(),
+            textAlign = TextAlign.Center,
+            style = MaterialTheme.typography.titleMedium,
+            fontWeight = FontWeight.Bold,
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun LoadingUserPreview() {
     MedicalTheme {
         LoadingUser()
     }
@@ -196,7 +303,7 @@ fun LoadingUser() {
 
 @Preview
 @Composable
-fun ProfileLoadingPreview() {
+fun ProfilePreview() {
     MedicalTheme {
         ProfileScreen(uiState = ProfileUiState.Loading)
     }
@@ -215,7 +322,7 @@ fun ProfileSuccessPreview() {
                     useDynamicColor = false,
                     address = "123 Main St",
                     bornDate = "01/01/1990",
-                    experience = "10 years",
+                    experience = "10",
                     graduationDate = "01/01/2010",
                     name = "Jane Doe",
                     occupation = "Doctor",
@@ -223,7 +330,7 @@ fun ProfileSuccessPreview() {
                     problemDescription = "",
                     specialty = "Cardiologist",
                     treatmentDate = "",
-                    userType = UserType.DOCTOR
+                    userType = UserType.DOCTOR,
                 ),
             ),
         )
