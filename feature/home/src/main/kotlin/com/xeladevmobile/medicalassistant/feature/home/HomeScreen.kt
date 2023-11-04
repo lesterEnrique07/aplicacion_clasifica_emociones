@@ -43,7 +43,10 @@ internal fun HomeScreenRoute(
     modifier: Modifier = Modifier,
     viewModel: HomeViewModel = hiltViewModel(),
 ) {
-
+    HomeScreen(
+        onDashboardClick = onDashboardClick,
+        modifier = modifier,
+    )
 }
 
 @Composable
@@ -51,20 +54,8 @@ internal fun HomeScreen(
     onDashboardClick: (String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    Scaffold(
-        topBar = {
-            HomeScreenToolbar(
-                modifier = Modifier,
-                username = "",
-                denomination = "",
-                image = "",
-            )
-        },
-        content = {
-            HomeScreenContent(
-                modifier = Modifier.padding(it),
-            )
-        },
+    HomeScreenContent(
+        modifier = Modifier.padding(),
     )
 }
 

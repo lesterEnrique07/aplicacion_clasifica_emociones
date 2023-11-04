@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
      Copyright 2023 Medical Assistant
 
      Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,6 +17,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <application
+        android:name=".MedicalApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"

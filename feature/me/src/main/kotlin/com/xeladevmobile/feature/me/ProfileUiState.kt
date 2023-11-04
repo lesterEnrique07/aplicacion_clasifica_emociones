@@ -15,6 +15,6 @@ sealed interface ProfileUiState {
      * The profile is loaded with the given user data.
      */
     data class Success(
-        val feed: List<UserData>,
+        val user: UserData,
     ) : ProfileUiState
 }

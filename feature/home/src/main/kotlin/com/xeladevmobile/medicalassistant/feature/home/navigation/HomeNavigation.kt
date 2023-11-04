@@ -11,12 +11,12 @@ private const val DEEP_LINK_URI_PATTERN =
     "https://www.medicalassistant.xeladevmobile.com/home"
 
 fun NavController.navigateToHome(navOptions: NavOptions? = null) {
-    this.navigate(DEEP_LINK_URI_PATTERN, navOptions)
+    this.navigate(homeScreenRoute, navOptions)
 }
 
 fun NavGraphBuilder.homeScreen(onDashboardClick: (String) -> Unit) {
     composable(
-        route = DEEP_LINK_URI_PATTERN,
+        route = homeScreenRoute,
     ) {
         HomeScreenRoute(onDashboardClick)
     }

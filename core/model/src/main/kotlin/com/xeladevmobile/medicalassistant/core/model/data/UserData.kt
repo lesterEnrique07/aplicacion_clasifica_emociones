@@ -20,9 +20,27 @@ package com.xeladevmobile.medicalassistant.core.model.data
  * Class summarizing user interest data
  */
 data class UserData(
-    // TODO: Add properties for patient or doctor later
     val themeBrand: ThemeBrand,
     val darkThemeConfig: DarkThemeConfig,
     val useDynamicColor: Boolean,
     val shouldHideOnboarding: Boolean,
+    val name: String,
+    val sex: String,
+    val bornDate: String,
+    val address: String,
+    val userType: UserType,
+
+    // Patient
+    val problemDescription: String,
+    val treatmentDate: String,
+
+    // Doctor
+    val specialty: String,
+    val graduationDate: String,
+    val experience: String,
+    val occupation: String,
 )
+
+enum class UserType {
+    DOCTOR, PATIENT
+}

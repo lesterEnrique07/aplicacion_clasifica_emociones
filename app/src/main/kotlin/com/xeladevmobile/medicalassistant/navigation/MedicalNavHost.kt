@@ -6,6 +6,7 @@ import androidx.navigation.compose.NavHost
 import com.xeladevmobile.feature.me.navigation.profileScreen
 import com.xeladevmobile.medicalassistant.feature.home.navigation.homeScreen
 import com.xeladevmobile.medicalassistant.feature.home.navigation.homeScreenRoute
+import com.xeladevmobile.medicalassistant.feature.records.navigation.recordsScreen
 import com.xeladevmobile.medicalassistant.ui.MedicalAppState
 
 /**
@@ -29,6 +30,7 @@ fun MedicalNavHost(
         modifier = modifier,
     ) {
         homeScreen(onDashboardClick = { })
+        recordsScreen(onElementClicked = { })
         profileScreen()
     }
 }

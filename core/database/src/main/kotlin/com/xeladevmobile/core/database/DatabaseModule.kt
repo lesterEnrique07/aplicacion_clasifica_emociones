@@ -35,6 +35,6 @@ object DatabaseModule {
     ): MedicalDatabase = Room.databaseBuilder(
         context,
         MedicalDatabase::class.java,
-        "nia-database",
+        "medical-database",
     ).build()
 }

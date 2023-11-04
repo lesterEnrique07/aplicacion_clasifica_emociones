@@ -20,6 +20,8 @@ import com.xeladevmobile.medicalassistant.core.data.util.NetworkMonitor
 import com.xeladevmobile.medicalassistant.core.ui.TrackDisposableJank
 import com.xeladevmobile.medicalassistant.feature.home.navigation.homeScreenRoute
 import com.xeladevmobile.medicalassistant.feature.home.navigation.navigateToHome
+import com.xeladevmobile.medicalassistant.feature.records.navigation.navigateToRecords
+import com.xeladevmobile.medicalassistant.feature.records.navigation.recordsScreenRoute
 import com.xeladevmobile.medicalassistant.navigation.TopLevelDestination
 import com.xeladevmobile.medicalassistant.navigation.TopLevelDestination.HOME
 import com.xeladevmobile.medicalassistant.navigation.TopLevelDestination.ME
@@ -67,6 +69,7 @@ class MedicalAppState(
     val currentTopLevelDestination: TopLevelDestination?
         @Composable get() = when (currentDestination?.route) {
             homeScreenRoute -> HOME
+            recordsScreenRoute -> RECORDS
             profileScreenRoute -> ME
             else -> null
         }
@@ -116,7 +119,7 @@ class MedicalAppState(
 
             when (topLevelDestination) {
                 HOME -> navController.navigateToHome(topLevelNavOptions)
-                RECORDS -> TODO()
+                RECORDS -> navController.navigateToRecords(topLevelNavOptions)
                 ME -> navController.navigateToProfile(topLevelNavOptions)
             }
         }

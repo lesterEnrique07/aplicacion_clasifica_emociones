@@ -82,9 +82,10 @@ dependencies {
 
     implementation(projects.feature.home)
     implementation(projects.feature.me)
+    implementation(projects.feature.records)
 
-    /*implementation(projects.sync.work)
-    androidTestImplementation(projects.core.network)*/
+    //implementation(projects.sync.work)
+    androidTestImplementation(projects.core.network)
     androidTestImplementation(projects.core.testing)
     androidTestImplementation(libs.androidx.navigation.testing)
     androidTestImplementation(libs.accompanist.testharness)
@@ -111,7 +112,7 @@ dependencies {
     testImplementation(projects.core.testing)
     testImplementation(projects.core.datastoreTest)
     testImplementation(projects.core.dataTest)
-    //testImplementation(projects.core.network)
+    testImplementation(projects.core.network)
     testImplementation(libs.androidx.navigation.testing)
     testImplementation(libs.accompanist.testharness)
     testImplementation(libs.work.testing)

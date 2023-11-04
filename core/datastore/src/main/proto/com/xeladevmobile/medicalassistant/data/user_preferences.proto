@@ -31,9 +31,23 @@ message UserPreferences {
   DarkThemeConfigProto dark_theme_config = 4;
   bool should_hide_onboarding = 5;
   bool use_dynamic_color = 6;
-  UserType user_type = 7;
+  string name = 7;
+  string sex = 8;
+  string bornDate = 9;
+  string address = 10;
 
-  // NEXT AVAILABLE ID: 7
+  // Patient
+  string problemDescription = 11;
+  string treatmentDate = 12;
+
+  // Doctor
+  string specialty = 13;
+  string graduationDate = 14;
+  string experience = 15;
+  string occupation = 16;
+  UserType user_type = 17;
+
+  // NEXT AVAILABLE ID: 18
 }
 
 enum UserType {

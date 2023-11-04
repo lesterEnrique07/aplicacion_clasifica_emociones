@@ -11,12 +11,12 @@ private const val DEEP_LINK_URI_PATTERN =
     "https://www.medicalassistant.xeladevmobile.com/me"
 
 fun NavController.navigateToProfile(navOptions: NavOptions? = null) {
-    this.navigate(DEEP_LINK_URI_PATTERN, navOptions)
+    this.navigate(profileScreenRoute, navOptions)
 }
 
 fun NavGraphBuilder.profileScreen() {
     composable(
-        route = DEEP_LINK_URI_PATTERN,
+        route = profileScreenRoute,
     ) {
         ProfileScreenRoute()
     }
