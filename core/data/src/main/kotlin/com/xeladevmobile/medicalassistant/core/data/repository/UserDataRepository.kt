@@ -19,6 +19,7 @@ package com.xeladevmobile.medicalassistant.core.data.repository
 import com.xeladevmobile.medicalassistant.core.model.data.DarkThemeConfig
 import com.xeladevmobile.medicalassistant.core.model.data.ThemeBrand
 import com.xeladevmobile.medicalassistant.core.model.data.UserData
+import com.xeladevmobile.medicalassistant.core.model.data.UserType
 import kotlinx.coroutines.flow.Flow
 
 interface UserDataRepository {
@@ -48,5 +49,58 @@ interface UserDataRepository {
      */
     suspend fun setShouldHideOnboarding(shouldHideOnboarding: Boolean)
 
-    
+    /**
+     * Sets the user's full name.
+     */
+    suspend fun setFullName(fullName: String)
+
+    /**
+     * Sets the user's sex.
+     */
+    suspend fun setSex(sex: String)
+
+    /**
+     * Sets the user's birth date.
+     */
+    suspend fun setBornDate(bornDate: String)
+
+    /**
+     * Sets the user's address.
+     */
+    suspend fun setAddress(address: String)
+
+    /**
+     * Sets the user's type.
+     */
+    suspend fun setUserType(userType: UserType)
+
+    /**
+     * Sets the user's problem description.
+     */
+    suspend fun setProblemDescription(problemDescription: String)
+
+    /**
+     * Sets the user's treatment date.
+     */
+    suspend fun setTreatmentDate(treatmentDate: String)
+
+    /**
+     * Sets the user's specialty.
+     */
+    suspend fun setSpecialty(specialty: String)
+
+    /**
+     * Sets the user's graduation date.
+     */
+    suspend fun setGraduationDate(graduationDate: String)
+
+    /**
+     * Sets the user's experience.
+     */
+    suspend fun setExperience(experience: String)
+
+    /**
+     * Sets the user's occupation.
+     */
+    suspend fun setOccupation(occupation: String)
 }

@@ -1,7 +1,12 @@
 package com.xeladevmobile.feature.me
 
+import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.LinearOutSlowInEasing
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -33,6 +38,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontStyle
@@ -256,31 +263,41 @@ internal fun ExperienceTextAnimated(
     modifier: Modifier = Modifier,
     years: String,
 ) {
-    val alpha: Float by animateFloatAsState(
-        targetValue = 1f,
-        animationSpec = tween(
-            durationMillis = 1000,
-            easing = LinearOutSlowInEasing,
+    // Create an infinite transition that repeats the animation
+    val infiniteTransition = rememberInfiniteTransition()
+    val scale by infiniteTransition.animateFloat(
+        initialValue = 0.8f,
+        targetValue = 1.2f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(
+                durationMillis = 1000,
+                easing = FastOutSlowInEasing
+            ),
+            repeatMode = RepeatMode.Reverse
         ),
-        label = "",
+        label = ""
     )
 
     Column(
         modifier = modifier
-            .alpha(alpha)
             .testTag("profile:experience")
-            .alpha(alpha), // Apply fade-in
+            .padding(bottom = 16.dp)
+            .graphicsLayer {
+                // Apply the scale to the graphics layer of the Column
+                scaleX = scale
+                scaleY = scale
+            },
         verticalArrangement = Arrangement.Center,
     ) {
         val iconTint = LocalTintTheme.current.iconTint
+
         Text(
             modifier = Modifier
                 .fillMaxWidth(),
             text = years,
             textAlign = TextAlign.Center,
-            fontSize = 64.sp,
+            fontSize = with(LocalDensity.current) { 64.sp * scale },
             color = iconTint ?: MaterialTheme.colorScheme.primary,
-
         )
 
         Text(

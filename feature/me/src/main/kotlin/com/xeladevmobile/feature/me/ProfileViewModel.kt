@@ -12,7 +12,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
-    private val userDataRepository: UserDataRepository,
+    userDataRepository: UserDataRepository,
 ) : ViewModel() {
     val uiState: StateFlow<ProfileUiState> = userDataRepository.userData.map {
         ProfileUiState.Success(it)

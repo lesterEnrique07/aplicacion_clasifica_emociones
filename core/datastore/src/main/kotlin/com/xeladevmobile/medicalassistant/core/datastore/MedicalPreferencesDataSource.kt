@@ -187,6 +187,17 @@ class MedicalPreferencesDataSource @Inject constructor(
         }
     }
 
+    suspend fun setUserType(userType: UserType) {
+        userPreferences.updateData {
+            it.copy {
+                this.userType = when (userType) {
+                    UserType.DOCTOR -> DOCTOR
+                    UserType.PATIENT -> PATIENT
+                }
+            }
+        }
+    }
+
     suspend fun setTreatmentDate(treatmentDate: String) {
         userPreferences.updateData {
             it.copy {

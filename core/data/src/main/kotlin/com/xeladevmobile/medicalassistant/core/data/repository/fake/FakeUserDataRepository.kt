@@ -21,6 +21,7 @@ import com.xeladevmobile.medicalassistant.core.datastore.MedicalPreferencesDataS
 import com.xeladevmobile.medicalassistant.core.model.data.DarkThemeConfig
 import com.xeladevmobile.medicalassistant.core.model.data.ThemeBrand
 import com.xeladevmobile.medicalassistant.core.model.data.UserData
+import com.xeladevmobile.medicalassistant.core.model.data.UserType
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
@@ -51,5 +52,49 @@ class FakeUserDataRepository @Inject constructor(
 
     override suspend fun setShouldHideOnboarding(shouldHideOnboarding: Boolean) {
         medicalPreferencesDataSource.setShouldHideOnboarding(shouldHideOnboarding)
+    }
+
+    override suspend fun setFullName(fullName: String) {
+        medicalPreferencesDataSource.setName(fullName)
+    }
+
+    override suspend fun setSex(sex: String) {
+        medicalPreferencesDataSource.setSex(sex)
+    }
+
+    override suspend fun setBornDate(bornDate: String) {
+        medicalPreferencesDataSource.setBornDate(bornDate)
+    }
+
+    override suspend fun setAddress(address: String) {
+        medicalPreferencesDataSource.setAddress(address)
+    }
+
+    override suspend fun setUserType(userType: UserType) {
+        medicalPreferencesDataSource.setUserType(userType)
+    }
+
+    override suspend fun setProblemDescription(problemDescription: String) {
+        medicalPreferencesDataSource.setProblemDescription(problemDescription)
+    }
+
+    override suspend fun setTreatmentDate(treatmentDate: String) {
+        medicalPreferencesDataSource.setTreatmentDate(treatmentDate)
+    }
+
+    override suspend fun setSpecialty(specialty: String) {
+        medicalPreferencesDataSource.setSpecialty(specialty)
+    }
+
+    override suspend fun setGraduationDate(graduationDate: String) {
+        medicalPreferencesDataSource.setGraduationDate(graduationDate)
+    }
+
+    override suspend fun setExperience(experience: String) {
+        medicalPreferencesDataSource.setExperience(experience)
+    }
+
+    override suspend fun setOccupation(occupation: String) {
+        medicalPreferencesDataSource.setOccupation(occupation)
     }
 }

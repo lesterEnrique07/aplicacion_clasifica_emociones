@@ -43,10 +43,10 @@ dependencies {
     implementation(projects.core.analytics)
     implementation(projects.core.designsystem)
     implementation(projects.core.model)
-    /*
+
 
     implementation(projects.core.domain)
-    */
+
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.browser)
     implementation(libs.androidx.core.ktx)

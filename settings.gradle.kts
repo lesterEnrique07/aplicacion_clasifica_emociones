@@ -40,6 +40,9 @@ include(":core:database")
 include(":core:datastore")
 include(":core:datastore-test")
 include(":core:data")
+include(":core:domain")
+
+include(":core:network")
 include(":core:data-test")
 include(":core:designsystem")
 include(":core:ui")
@@ -53,24 +56,7 @@ include(":feature:settings")
 
 /*
 include(":benchmarks")
-
-
-
-include(":core:database")
-
-
-
-include(":core:domain")
-
-include(":core:network")
-
-
-
-include(":core:notifications")*/
-
-/*
 include(":lint")
 include(":sync:work")
 include(":sync:sync-test")
 include(":ui-test-hilt-manifest")*/
-include(":core:network")
