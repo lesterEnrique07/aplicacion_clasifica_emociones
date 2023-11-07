@@ -24,7 +24,7 @@ import com.xeladevmobile.medicalassistant.feature.records.navigation.navigateToR
 import com.xeladevmobile.medicalassistant.feature.records.navigation.recordsScreenRoute
 import com.xeladevmobile.medicalassistant.navigation.TopLevelDestination
 import com.xeladevmobile.medicalassistant.navigation.TopLevelDestination.HOME
-import com.xeladevmobile.medicalassistant.navigation.TopLevelDestination.ME
+import com.xeladevmobile.medicalassistant.navigation.TopLevelDestination.PROFILE
 import com.xeladevmobile.medicalassistant.navigation.TopLevelDestination.RECORDS
 import com.xeladevmobile.medicalassistant.navigation.TopLevelDestination.values
 import kotlinx.coroutines.CoroutineScope
@@ -70,7 +70,7 @@ class MedicalAppState(
         @Composable get() = when (currentDestination?.route) {
             homeScreenRoute -> HOME
             recordsScreenRoute -> RECORDS
-            profileScreenRoute -> ME
+            profileScreenRoute -> PROFILE
             else -> null
         }
 
@@ -120,7 +120,7 @@ class MedicalAppState(
             when (topLevelDestination) {
                 HOME -> navController.navigateToHome(topLevelNavOptions)
                 RECORDS -> navController.navigateToRecords(topLevelNavOptions)
-                ME -> navController.navigateToProfile(topLevelNavOptions)
+                PROFILE -> navController.navigateToProfile(topLevelNavOptions)
             }
         }
     }

@@ -16,6 +16,8 @@
 
 package com.xeladevmobile.medicalassistant.core.data.di
 
+import com.xeladevmobile.medicalassistant.core.data.repository.AudioRecordsRepository
+import com.xeladevmobile.medicalassistant.core.data.repository.OfflineFirstAudioRecordsRepository
 import com.xeladevmobile.medicalassistant.core.data.repository.OfflineFirstUserDataRepository
 import com.xeladevmobile.medicalassistant.core.data.repository.UserDataRepository
 import com.xeladevmobile.medicalassistant.core.data.util.ConnectivityManagerNetworkMonitor
@@ -33,6 +35,11 @@ interface DataModule {
     fun bindsUserDataRepository(
         userDataRepository: OfflineFirstUserDataRepository,
     ): UserDataRepository
+
+    @Binds
+    fun bindAudioRepository(
+        audioRepository: OfflineFirstAudioRecordsRepository,
+    ): AudioRecordsRepository
 
     @Binds
     fun bindsNetworkMonitor(

@@ -78,6 +78,72 @@ class TestUserDataRepository : UserDataRepository {
         }
     }
 
+    override suspend fun setFullName(fullName: String) {
+        currentUserData.let { current ->
+            _userData.tryEmit(current.copy(name = fullName))
+        }
+    }
+
+    override suspend fun setSex(sex: String) {
+        currentUserData.let { current ->
+            _userData.tryEmit(current.copy(sex = sex))
+        }
+    }
+
+    override suspend fun setBornDate(bornDate: String) {
+        currentUserData.let { current ->
+            _userData.tryEmit(current.copy(bornDate = bornDate))
+        }
+    }
+
+    override suspend fun setAddress(address: String) {
+        currentUserData.let { current ->
+            _userData.tryEmit(current.copy(address = address))
+        }
+    }
+
+    override suspend fun setUserType(userType: UserType) {
+        currentUserData.let { current ->
+            _userData.tryEmit(current.copy(userType = userType))
+        }
+    }
+
+    override suspend fun setProblemDescription(problemDescription: String) {
+        currentUserData.let { current ->
+            _userData.tryEmit(current.copy(problemDescription = problemDescription))
+        }
+    }
+
+    override suspend fun setTreatmentDate(treatmentDate: String) {
+        currentUserData.let { current ->
+            _userData.tryEmit(current.copy(treatmentDate = treatmentDate))
+        }
+    }
+
+    override suspend fun setSpecialty(specialty: String) {
+        currentUserData.let { current ->
+            _userData.tryEmit(current.copy(specialty = specialty))
+        }
+    }
+
+    override suspend fun setGraduationDate(graduationDate: String) {
+        currentUserData.let { current ->
+            _userData.tryEmit(current.copy(graduationDate = graduationDate))
+        }
+    }
+
+    override suspend fun setExperience(experience: String) {
+        currentUserData.let { current ->
+            _userData.tryEmit(current.copy(experience = experience))
+        }
+    }
+
+    override suspend fun setOccupation(occupation: String) {
+        currentUserData.let { current ->
+            _userData.tryEmit(current.copy(occupation = occupation))
+        }
+    }
+
     /**
      * A test-only API to allow setting of user data directly.
      */

@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 The Android Open Source Project
+ * Copyright 2022 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,18 +14,19 @@
  * limitations under the License.
  */
 
-package com.google.samples.apps.nowinandroid.core.domain
+package com.xeladevmobile.medicalassistant.core.network.di
 
-import com.google.samples.apps.nowinandroid.core.data.repository.SearchContentsRepository
-import kotlinx.coroutines.flow.Flow
-import javax.inject.Inject
+import com.xeladevmobile.core.network.MedicalNetworkDataSource
+import com.xeladevmobile.core.network.fake.FakeMedicalNetworkDataSource
+import dagger.Binds
+import dagger.Module
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 
-/**
- * A use case which returns total count of *Fts tables
- */
-class GetSearchContentsCountUseCase @Inject constructor(
-    private val searchContentsRepository: SearchContentsRepository,
-) {
-    operator fun invoke(): Flow<Int> =
-        searchContentsRepository.getSearchContentsCount()
+@Module
+@InstallIn(SingletonComponent::class)
+interface FlavoredNetworkModule {
+
+    @Binds
+    fun binds(impl: FakeMedicalNetworkDataSource): MedicalNetworkDataSource
 }

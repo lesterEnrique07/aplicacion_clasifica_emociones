@@ -5,6 +5,7 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.PrimaryKey
+import com.xeladevmobile.medicalassistant.core.model.data.Audio
 
 @Entity(
     tableName = "audio",
@@ -26,5 +27,13 @@ data class AudioEntity(
     val duration: Int,
     @ColumnInfo(name = "created_date")
     val createdDate: Long,
+    val path: String,
     @ColumnInfo(name = "patient_id") val patientId: String,
+)
+
+fun AudioEntity.asExternalModel() = Audio(
+    extension = extension,
+    duration = duration,
+    path = path,
+    createdDate = createdDate,
 )

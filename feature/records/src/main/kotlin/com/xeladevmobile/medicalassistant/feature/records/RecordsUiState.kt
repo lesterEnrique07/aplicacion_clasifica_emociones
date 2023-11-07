@@ -1,6 +1,6 @@
 package com.xeladevmobile.medicalassistant.feature.records
 
-import com.xeladevmobile.medicalassistant.core.model.data.UserData
+import com.xeladevmobile.medicalassistant.core.model.data.Audio
 
 /**
  * A sealed hierarchy describing the state of the records.
@@ -22,6 +22,6 @@ sealed interface RecordsUiState {
      * their patients and their records.
      */
     data class Success(
-        val feed: List<UserData>,
+        val audioList: List<Audio>,
     ) : RecordsUiState
 }

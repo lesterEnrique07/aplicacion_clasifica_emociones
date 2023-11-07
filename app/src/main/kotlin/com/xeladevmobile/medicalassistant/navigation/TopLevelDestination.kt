@@ -29,7 +29,7 @@ enum class TopLevelDestination(
         iconTextId = recordsR.string.records,
         titleTextId = recordsR.string.records,
     ),
-    ME(
+    PROFILE(
         selectedIcon = MedicalIcons.Person,
         unselectedIcon = MedicalIcons.Person,
         iconTextId = meR.string.profile,

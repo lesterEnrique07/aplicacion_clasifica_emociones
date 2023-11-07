@@ -17,7 +17,7 @@ class AndroidLintConventionPlugin : Plugin<Project> {
 
                 else -> {
                     pluginManager.apply("com.android.lint")
-                    configure<Lint>(Lint::configure)
+                    configure(Lint::configure)
                 }
             }
         }
