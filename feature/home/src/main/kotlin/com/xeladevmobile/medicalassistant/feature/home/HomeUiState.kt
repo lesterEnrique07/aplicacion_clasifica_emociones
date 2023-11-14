@@ -1,5 +1,8 @@
 package com.xeladevmobile.medicalassistant.feature.home
 
+import com.xeladevmobile.medicalassistant.core.model.data.Audio
+import com.xeladevmobile.medicalassistant.core.model.data.UserData
+
 /**
  * A sealed hierarchy describing the onboarding state for the for you screen.
  */
@@ -12,10 +15,5 @@ sealed interface HomeUiState {
     /**
      * The home state was unable to load.
      */
-    data object LoadFailed : HomeUiState
-
-    /**
-     * The home state has loaded.
-     */
-    data object Loaded : HomeUiState
+    data class Success(val userData: UserData, val audioRecords: List<Audio>) : HomeUiState
 }

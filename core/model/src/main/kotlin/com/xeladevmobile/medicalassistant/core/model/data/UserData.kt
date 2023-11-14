@@ -44,3 +44,40 @@ data class UserData(
 enum class UserType {
     DOCTOR, PATIENT
 }
+
+val patientUserData = UserData(
+    themeBrand = ThemeBrand.ANDROID,
+    darkThemeConfig = DarkThemeConfig.DARK,
+    useDynamicColor = true,
+    shouldHideOnboarding = true,
+    name = "Alice Johnson",
+    sex = "Female",
+    bornDate = "1985-04-23",
+    address = "123 Apple Street, New York, NY",
+    userType = UserType.PATIENT,
+    problemDescription = "Seasonal allergies",
+    treatmentDate = "2023-04-10",
+    specialty = "",
+    graduationDate = "",
+    experience = "",
+    occupation = "",
+)
+
+// Mock doctor data
+val doctorUserData = UserData(
+    themeBrand = ThemeBrand.DEFAULT,
+    darkThemeConfig = DarkThemeConfig.FOLLOW_SYSTEM,
+    useDynamicColor = false,
+    shouldHideOnboarding = false,
+    name = "Dr. John Smith",
+    sex = "Male",
+    bornDate = "1975-08-15",
+    address = "456 Orange Avenue, Los Angeles, CA",
+    userType = UserType.DOCTOR,
+    specialty = "Pediatrics",
+    graduationDate = "2000-06-20",
+    experience = "20 years",
+    occupation = "Pediatrician",
+    problemDescription = "",
+    treatmentDate = "",
+)

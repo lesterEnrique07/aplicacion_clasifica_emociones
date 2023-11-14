@@ -6,6 +6,7 @@ import com.xeladevmobile.core.database.model.AudioEntity
 import com.xeladevmobile.core.database.model.asExternalModel
 import com.xeladevmobile.core.network.MedicalNetworkDataSource
 import com.xeladevmobile.medicalassistant.core.model.data.Audio
+import com.xeladevmobile.medicalassistant.core.model.data.Emotion
 import com.xeladevmobile.medicalassistant.core.model.data.audiosPreview
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
@@ -23,7 +24,7 @@ class OfflineFirstAudioRecordsRepository @Inject constructor(
     override fun getAudio(audioId: String): Flow<Audio> =
         audioDao.getAudioById(audioId).map(AudioEntity::asExternalModel)
 
-    override suspend fun insertAudioRecord(patientId: String, filePath: String) {
+    override suspend fun insertAudioRecord(patientId: String, emotion: Emotion, filePath: String) {
         val retriever = MediaMetadataRetriever()
         try {
             retriever.setDataSource(filePath)
@@ -43,6 +44,7 @@ class OfflineFirstAudioRecordsRepository @Inject constructor(
                 duration = duration,
                 path = filePath,
                 createdDate = System.currentTimeMillis(),
+                emotion = emotion,
             )
 
             // Insert the audio entity into the database
