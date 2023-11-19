@@ -27,6 +27,7 @@ dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
         google()
+        maven("https://jitpack.io")
         mavenCentral()
     }
 }
@@ -60,3 +61,6 @@ include(":lint")
 include(":sync:work")
 include(":sync:sync-test")
 include(":ui-test-hilt-manifest")*/
+include(":feature:voice")
+include(":feature:playback")
+include(":feature:login")

@@ -57,14 +57,14 @@ import com.xeladevmobile.medicalassistant.core.ui.DevicePreviews
 
 @Composable
 internal fun HomeScreenRoute(
-    onDashboardClick: (String) -> Unit,
+    onStartRecordingClick: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: HomeViewModel = hiltViewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     HomeScreen(
-        onDashboardClick = onDashboardClick,
+        onStartRecordingClick = onStartRecordingClick,
         modifier = modifier,
         uiState = uiState,
     )
@@ -72,7 +72,7 @@ internal fun HomeScreenRoute(
 
 @Composable
 internal fun HomeScreen(
-    onDashboardClick: (String) -> Unit,
+    onStartRecordingClick: () -> Unit,
     modifier: Modifier = Modifier,
     uiState: HomeUiState,
 ) {
@@ -81,6 +81,7 @@ internal fun HomeScreen(
             InitRecordCard(
                 userData = null,
                 image = "",
+                onStartRecordingClick = { },
             )
         }
 
@@ -89,6 +90,7 @@ internal fun HomeScreen(
                 modifier = modifier,
                 patientStatisticsList = uiState.audioRecords.calculateStatistics(),
                 userData = uiState.userData,
+                onStartRecordingClick = onStartRecordingClick,
             )
         }
     }
@@ -99,7 +101,7 @@ internal fun HomeScreen(
 internal fun HomeScreenPreview() {
     MedicalTheme {
         HomeScreen(
-            onDashboardClick = {},
+            onStartRecordingClick = {},
             modifier = Modifier,
             uiState = HomeUiState.Success(
                 userData = patientUserData,
@@ -114,6 +116,7 @@ internal fun HomeScreenContent(
     modifier: Modifier = Modifier,
     patientStatisticsList: List<PatientStatistics> = listOf(),
     userData: UserData,
+    onStartRecordingClick: () -> Unit,
 ) {
     Column {
         LazyVerticalStaggeredGrid(
@@ -126,7 +129,7 @@ internal fun HomeScreenContent(
         ) {
             item {
                 InitRecordCard(
-                    userData, "",
+                    userData, "", onStartRecordingClick = onStartRecordingClick,
                 )
             }
             items(
@@ -147,7 +150,7 @@ internal fun HomeScreenContent(
 }
 
 @Composable
-internal fun InitRecordCard(userData: UserData?, image: String) {
+internal fun InitRecordCard(userData: UserData?, image: String, onStartRecordingClick: () -> Unit) {
     Card(
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
         modifier = Modifier
@@ -210,7 +213,7 @@ internal fun InitRecordCard(userData: UserData?, image: String) {
                 Spacer(Modifier.weight(1f))
 
                 Button(
-                    onClick = { /*TODO*/ },
+                    onClick = onStartRecordingClick,
                     modifier = Modifier
                         .padding(16.dp)
                         .align(Alignment.CenterVertically),
@@ -227,7 +230,7 @@ internal fun InitRecordCard(userData: UserData?, image: String) {
 internal fun InitRecordCardPreview() {
     MedicalTheme {
         InitRecordCard(
-            patientUserData, "",
+            patientUserData, "", {},
         )
     }
 }
@@ -240,6 +243,7 @@ internal fun HomeScreenContentPreview() {
             modifier = Modifier,
             patientStatisticsList = audiosPreview.calculateStatistics(),
             userData = patientUserData,
+            onStartRecordingClick = { },
         )
     }
 }
@@ -296,7 +300,7 @@ internal fun StatisticsCard(statistics: PatientStatistics) {
                 Text(
                     text = annotatedString,
                     style = typography.bodyMedium,
-                    modifier = Modifier.padding(bottom = 16.dp)
+                    modifier = Modifier.padding(bottom = 16.dp),
                 )
 
                 Divider(
@@ -313,19 +317,6 @@ internal fun StatisticsCard(statistics: PatientStatistics) {
                 )
             }
         }
-    }
-}
-
-
-@Composable
-fun BulletPointText(line: String) {
-    Row(verticalAlignment = Alignment.CenterVertically) {
-        Text("•", style = typography.bodyMedium)
-        Text(
-            text = line.removePrefix("• "),
-            style = typography.bodyMedium,
-            modifier = Modifier.padding(start = 8.dp)
-        )
     }
 }
 

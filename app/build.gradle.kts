@@ -82,6 +82,9 @@ dependencies {
 
     implementation(projects.feature.home)
     implementation(projects.feature.me)
+    implementation(projects.feature.voice)
+    implementation(projects.feature.playback)
+    implementation(projects.feature.login)
     implementation(projects.feature.records)
 
     //implementation(projects.sync.work)

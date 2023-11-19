@@ -1,4 +1,4 @@
-package com.xeladevmobile.feature.me
+package com.xeladevmobile.medicalassistant.feature.me
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

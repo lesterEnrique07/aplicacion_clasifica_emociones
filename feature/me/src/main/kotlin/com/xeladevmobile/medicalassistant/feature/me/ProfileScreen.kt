@@ -1,4 +1,4 @@
-package com.xeladevmobile.feature.me
+package com.xeladevmobile.medicalassistant.feature.me
 
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.LinearOutSlowInEasing
@@ -55,8 +55,6 @@ import com.xeladevmobile.medicalassistant.core.model.data.DarkThemeConfig
 import com.xeladevmobile.medicalassistant.core.model.data.ThemeBrand
 import com.xeladevmobile.medicalassistant.core.model.data.UserData
 import com.xeladevmobile.medicalassistant.core.model.data.UserType
-import com.xeladevmobile.medicalassistant.feature.me.R
-import kotlinx.coroutines.delay
 
 @Composable
 internal fun ProfileScreenRoute(

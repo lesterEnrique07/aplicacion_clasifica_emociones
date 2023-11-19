@@ -108,18 +108,6 @@ fun List<Audio>.calculateStatistics(): List<PatientStatistics> {
             value = emotionDiversity,
             updatedAt = "2023-04-01",
         ),
-        PatientStatistics(
-            header = "Average Duration per Emotion",
-            description = "The average duration of recordings for each emotion is listed below:",
-            value = averageDurationFormatted,
-            updatedAt = "2023-04-01",
-        ),
-        PatientStatistics(
-            header = "Distribution of Emotions",
-            description = "The count of each emotion recorded is as follows:",
-            value = emotionCountFormatted,
-            updatedAt = "2023-04-01",
-        ),
     )
 }
 

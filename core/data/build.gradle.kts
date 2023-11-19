@@ -42,6 +42,7 @@ dependencies {
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.kotlinx.datetime)
     implementation(libs.kotlinx.serialization.json)
+    implementation(libs.github.amplituda)
 
     testImplementation(projects.core.datastoreTest)
     testImplementation(projects.core.testing)

@@ -1,4 +1,4 @@
-package com.xeladevmobile.feature.me
+package com.xeladevmobile.medicalassistant.feature.me
 
 import com.xeladevmobile.medicalassistant.core.model.data.UserData
 

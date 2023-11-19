@@ -14,12 +14,12 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
 import androidx.tracing.trace
-import com.xeladevmobile.feature.me.navigation.navigateToProfile
-import com.xeladevmobile.feature.me.navigation.profileScreenRoute
 import com.xeladevmobile.medicalassistant.core.data.util.NetworkMonitor
 import com.xeladevmobile.medicalassistant.core.ui.TrackDisposableJank
 import com.xeladevmobile.medicalassistant.feature.home.navigation.homeScreenRoute
-import com.xeladevmobile.medicalassistant.feature.home.navigation.navigateToHome
+import com.xeladevmobile.medicalassistant.feature.home.navigation.navigateToHomeGraph
+import com.xeladevmobile.medicalassistant.feature.me.navigation.navigateToProfile
+import com.xeladevmobile.medicalassistant.feature.me.navigation.profileScreenRoute
 import com.xeladevmobile.medicalassistant.feature.records.navigation.navigateToRecords
 import com.xeladevmobile.medicalassistant.feature.records.navigation.recordsScreenRoute
 import com.xeladevmobile.medicalassistant.navigation.TopLevelDestination
@@ -118,7 +118,7 @@ class MedicalAppState(
             }
 
             when (topLevelDestination) {
-                HOME -> navController.navigateToHome(topLevelNavOptions)
+                HOME -> navController.navigateToHomeGraph(topLevelNavOptions)
                 RECORDS -> navController.navigateToRecords(topLevelNavOptions)
                 PROFILE -> navController.navigateToProfile(topLevelNavOptions)
             }

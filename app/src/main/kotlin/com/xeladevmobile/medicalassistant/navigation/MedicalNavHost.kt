@@ -2,11 +2,17 @@ package com.xeladevmobile.medicalassistant.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavOptions
 import androidx.navigation.compose.NavHost
-import com.xeladevmobile.feature.me.navigation.profileScreen
-import com.xeladevmobile.medicalassistant.feature.home.navigation.homeScreen
-import com.xeladevmobile.medicalassistant.feature.home.navigation.homeScreenRoute
+import com.xeladevmobile.medicalassistant.feature.home.navigation.HOME_GRAPH_ROUTE_PATTERN
+import com.xeladevmobile.medicalassistant.feature.home.navigation.homeGraph
+import com.xeladevmobile.medicalassistant.feature.home.navigation.navigateToHomeGraph
+import com.xeladevmobile.medicalassistant.feature.me.navigation.profileScreen
+import com.xeladevmobile.medicalassistant.feature.playback.navigation.navigateToPlayRecordVoice
+import com.xeladevmobile.medicalassistant.feature.playback.navigation.playVoiceRecordScreen
 import com.xeladevmobile.medicalassistant.feature.records.navigation.recordsScreen
+import com.xeladevmobile.medicalassistant.feature.voice.navigation.navigateToRecordVoice
+import com.xeladevmobile.medicalassistant.feature.voice.navigation.voiceRecordScreen
 import com.xeladevmobile.medicalassistant.ui.MedicalAppState
 
 /**
@@ -21,7 +27,7 @@ fun MedicalNavHost(
     appState: MedicalAppState,
     onShowSnackbar: suspend (String, String?) -> Boolean,
     modifier: Modifier = Modifier,
-    startDestination: String = homeScreenRoute,
+    startDestination: String = HOME_GRAPH_ROUTE_PATTERN,
 ) {
     val navController = appState.navController
     NavHost(
@@ -29,7 +35,25 @@ fun MedicalNavHost(
         startDestination = startDestination,
         modifier = modifier,
     ) {
-        homeScreen(onDashboardClick = { })
+        homeGraph(
+            onStartRecordingClick = navController::navigateToRecordVoice,
+            nestedGraphs = {
+                voiceRecordScreen(
+                    onRecordFinish = navController::navigateToPlayRecordVoice,
+                    onBackClick = navController::popBackStack,
+                )
+
+                playVoiceRecordScreen(
+                    onBackClick = {
+                        navController.navigateToHomeGraph(
+                            navOptions = NavOptions.Builder()
+                                .setPopUpTo(HOME_GRAPH_ROUTE_PATTERN, true)
+                                .build(),
+                        )
+                    },
+                )
+            },
+        )
         recordsScreen(onElementClicked = { })
         profileScreen()
     }

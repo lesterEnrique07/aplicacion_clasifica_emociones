@@ -1,9 +1,7 @@
 package com.xeladevmobile.medicalassistant.feature.records
 
 import androidx.compose.animation.core.Animatable
-import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.LinearOutSlowInEasing
-import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -16,15 +14,11 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.graphics.lerp
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -86,11 +80,11 @@ fun AudioRecordItem(
 // Helper function to get a color based on the emotion
 fun colorForEmotion(emotion: Emotion): Color {
     return when (emotion) {
-        Emotion.Neutral -> Color.Gray
-        Emotion.Angry -> Color.Red
+        Emotion.Neutral -> Color(0xFF8D8989)
+        Emotion.Angry -> Color(0xFFE53935) // A darker red for better contrast
         Emotion.Happiness -> Color(0xFF968022) // A golden shade for better contrast
         Emotion.Disgust -> Color(0xFF4CAF50) // A darker green for better contrast
-        Emotion.Fear -> Color.DarkGray
+        Emotion.Fear -> Color(0xFFC542DB) // A darker purple for better contrast
     }
 }
 
@@ -113,7 +107,7 @@ fun AnimatedEmoji(emoji: String) {
     LaunchedEffect(true) {
         animated.animateTo(
             targetValue = 1f,
-            animationSpec = tween(durationMillis = 500, easing = LinearOutSlowInEasing)
+            animationSpec = tween(durationMillis = 500, easing = LinearOutSlowInEasing),
         )
     }
 
@@ -126,7 +120,7 @@ fun AnimatedEmoji(emoji: String) {
                 scaleY = scale
                 alpha = animated.value
             },
-        style = MaterialTheme.typography.headlineMedium.copy(fontSize = 24.sp)
+        style = MaterialTheme.typography.headlineMedium.copy(fontSize = 24.sp),
     )
 }
 
