@@ -5,7 +5,10 @@
     <string name="loading">Loading</string>
     <string name="emotion_detected">Emotion Detected: %1$s</string>
     <string name="audio_file_details">Audio File Details</string>
-    <string name="audio_file_details_description">This will display the details of the audio file. All the information shown is necessary for our analysis.\nIf the audio is not yet analyze, a button will be displayed at the bottom, please if everything is correct, click on it to start.</string>
+    <string name="audio_file_details_description">This will display the details of the audio file. All the
+        information shown is necessary for our analysis.\nIf the audio is not yet analyze and you go back, the
+        changes will not be saved at all.
+    </string>
     <string name="audio_name">• Name: %1$s</string>
     <string name="audio_extension">• Extension: %1$s</string>
     <string name="audio_duration">• Duration: %1$s</string>

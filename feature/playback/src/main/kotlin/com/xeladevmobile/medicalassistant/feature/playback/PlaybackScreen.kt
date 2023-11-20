@@ -1,6 +1,10 @@
 package com.xeladevmobile.medicalassistant.feature.playback
 
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.LinearOutSlowInEasing
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -30,23 +34,32 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.compose.ui.util.lerp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.linc.audiowaveform.AudioWaveform
 import com.xeladevmobile.medicalassistant.core.designsystem.component.MedicalLoadingWheel
 import com.xeladevmobile.medicalassistant.core.designsystem.icon.MedicalIcons
+import com.xeladevmobile.medicalassistant.core.formatCreatedDate
+import com.xeladevmobile.medicalassistant.core.formatDuration
 import com.xeladevmobile.medicalassistant.core.model.data.AudioDetails
 import com.xeladevmobile.medicalassistant.core.model.data.Emotion
+import com.xeladevmobile.medicalassistant.core.model.data.formattedDate
 import com.xeladevmobile.medicalassistant.core.model.data.formattedDuration
 import com.xeladevmobile.medicalassistant.core.model.data.formattedSize
 
@@ -129,9 +142,6 @@ internal fun PlaybackScreen(
         )
 
         Spacer(modifier = Modifier.weight(1f))
-
-        // Bottom layout for analyzing the record
-        AnalyzeAndEmotionLayout(onAnalyzeClicked = onAnalyzeClick)
     }
 }
 
@@ -149,7 +159,7 @@ fun PlaybackScreenPreview() {
             extension = "3gp",
             duration = 1000,
             quality = "Good",
-            recordDate = "2021-09-01",
+            recordDate = "20230901T211833.000Z",
             size = 1000000,
         ),
         isLoading = false,
@@ -161,32 +171,84 @@ fun PlaybackScreenPreview() {
 @Composable
 fun AnalyzeAndEmotionLayout(
     onAnalyzeClicked: () -> Unit,
-    emotion: Emotion? = null, // Assuming Emotion is a data class you've defined elsewhere
+    emotion: Emotion? = null,
 ) {
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center,
-        modifier = Modifier.fillMaxWidth(),
-    ) {
-        Button(
-            onClick = onAnalyzeClicked,
-            modifier = Modifier.padding(16.dp),
+    if (emotion == null) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            horizontalArrangement = Arrangement.Center,
         ) {
-            Text("Analyze Recording")
-        }
-
-        // The emotion display, which is only shown if there is emotion data available.
-        emotion?.let {
-            // Replace this Text with a fancier display for emotion as needed.
-            Text(
-                text = stringResource(R.string.emotion_detected, it.name),
-                style = MaterialTheme.typography.headlineMedium,
+            Button(
+                onClick = onAnalyzeClicked,
                 modifier = Modifier.padding(16.dp),
-            )
+            ) {
+                Text("Analyze Recording")
+            }
+        }
+    } else {
+        // Define a color based on the emotion
+        val backgroundColor = colorForEmotion(emotion)
+        // Define an emoji based on the emotion
+        val emoji = emojiForEmotion(emotion)
+
+        Card(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp),
+            colors = CardDefaults.cardColors(
+                containerColor = backgroundColor,
+            ), // Set the background color based on emotion
+            elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
+        ) {
+            Row(
+                modifier = Modifier
+                    .padding(16.dp)
+                    .fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Center,
+            ) {
+                Column {
+                    Text(text = "Emotion", style = MaterialTheme.typography.bodyMedium)
+                    Text(
+                        text = emotion.name,
+                        style = MaterialTheme.typography.titleMedium,
+                    )
+                }
+                Spacer(modifier = Modifier.weight(1f))
+
+                // Add animated emoji based on the emotion
+                AnimatedEmoji(emoji = emoji)
+            }
         }
     }
 }
 
+@Composable
+fun AnimatedEmoji(emoji: String) {
+    val animated = remember { Animatable(initialValue = 0f) }
+
+    // This will run the animation when this composable enters the Composition
+    LaunchedEffect(true) {
+        animated.animateTo(
+            targetValue = 1f,
+            animationSpec = tween(durationMillis = 500, easing = LinearOutSlowInEasing),
+        )
+    }
+
+    Text(
+        text = emoji,
+        modifier = Modifier
+            .graphicsLayer {
+                val scale = lerp(0.8f, 1f, animated.value)
+                scaleX = scale
+                scaleY = scale
+                alpha = animated.value
+            },
+        style = MaterialTheme.typography.headlineMedium.copy(fontSize = 24.sp),
+    )
+}
 
 @Composable
 fun PlaybackControls(
@@ -264,7 +326,7 @@ fun PlaybackControlsPreview() {
 }
 
 @Composable
-fun AudioFileDetailsCard(details: AudioDetails) {
+fun AudioFileDetailsCard(details: AudioDetails, emotion: Emotion? = null) {
     Card(
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
         modifier = Modifier
@@ -330,12 +392,14 @@ fun AudioFileDetailsCard(details: AudioDetails) {
                     color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.08f),
                 )
 
+                AnalyzeAndEmotionLayout(onAnalyzeClicked = { /*TODO*/ }, emotion = emotion)
+
                 Text(
-                    text = stringResource(R.string.audio_record_date, details.recordDate),
+                    text = stringResource(R.string.audio_record_date, details.formattedDate()),
                     style = MaterialTheme.typography.bodySmall,
+                    fontStyle = FontStyle.Italic,
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 16.dp),
+                        .fillMaxWidth(),
                     textAlign = TextAlign.End,
                 )
             }
@@ -352,9 +416,25 @@ fun AudioFileDetailsCardPreview() {
             extension = "3gp",
             duration = 1000,
             quality = "Good",
-            recordDate = "2021-09-01",
+            recordDate = "20230901T211833.000Z",
             size = 1000,
         ),
+    )
+}
+
+@Preview(showBackground = true)
+@Composable
+fun AudioFileDetailsCardWithEmotionPreview() {
+    AudioFileDetailsCard(
+        details = AudioDetails(
+            name = "recording_1",
+            extension = "3gp",
+            duration = 1000,
+            quality = "Good",
+            recordDate = "20230901T211833.000Z",
+            size = 1000,
+        ),
+        emotion = Emotion.Angry,
     )
 }
 
@@ -379,5 +459,27 @@ private fun PlaybackToolbar(
         }
 
         Text(stringResource(R.string.playback_audio), style = MaterialTheme.typography.headlineMedium)
+    }
+}
+
+// Helper function to get a color based on the emotion
+fun colorForEmotion(emotion: Emotion): Color {
+    return when (emotion) {
+        Emotion.Neutral -> Color(0xFF8D8989)
+        Emotion.Angry -> Color(0xFFE53935) // A darker red for better contrast
+        Emotion.Happiness -> Color(0xFF968022) // A golden shade for better contrast
+        Emotion.Disgust -> Color(0xFF4CAF50) // A darker green for better contrast
+        Emotion.Fear -> Color(0xFFC542DB) // A darker purple for better contrast
+    }
+}
+
+// Helper function to get an emoji based on the emotion
+fun emojiForEmotion(emotion: Emotion): String {
+    return when (emotion) {
+        Emotion.Neutral -> "😐"
+        Emotion.Angry -> "😠"
+        Emotion.Happiness -> "😄"
+        Emotion.Disgust -> "🤢"
+        Emotion.Fear -> "😨"
     }
 }

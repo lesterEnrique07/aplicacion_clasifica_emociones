@@ -90,7 +90,6 @@ internal fun RecordsScreen(
                         AudioRecordItem(
                             audio = audio,
                             onClick = { onElementClicked(audio) },
-                            emotion = audio.emotion,
                         )
                     }
                 }

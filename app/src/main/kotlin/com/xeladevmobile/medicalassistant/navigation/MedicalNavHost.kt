@@ -4,9 +4,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.NavHost
+import com.xeladevmobile.medicalassistant.core.model.data.UserData
+import com.xeladevmobile.medicalassistant.core.model.data.isLoggedIn
 import com.xeladevmobile.medicalassistant.feature.home.navigation.HOME_GRAPH_ROUTE_PATTERN
 import com.xeladevmobile.medicalassistant.feature.home.navigation.homeGraph
 import com.xeladevmobile.medicalassistant.feature.home.navigation.navigateToHomeGraph
+import com.xeladevmobile.medicalassistant.feature.login.navigation.LOGIN_GRAPH_ROUTE_PATTERN
+import com.xeladevmobile.medicalassistant.feature.login.navigation.loginGraph
 import com.xeladevmobile.medicalassistant.feature.me.navigation.profileScreen
 import com.xeladevmobile.medicalassistant.feature.playback.navigation.navigateToPlayRecordVoice
 import com.xeladevmobile.medicalassistant.feature.playback.navigation.playVoiceRecordScreen
@@ -24,10 +28,15 @@ import com.xeladevmobile.medicalassistant.ui.MedicalAppState
  */
 @Composable
 fun MedicalNavHost(
+    userData: UserData,
     appState: MedicalAppState,
     onShowSnackbar: suspend (String, String?) -> Boolean,
     modifier: Modifier = Modifier,
-    startDestination: String = HOME_GRAPH_ROUTE_PATTERN,
+    startDestination: String =
+        if (userData.isLoggedIn())
+            HOME_GRAPH_ROUTE_PATTERN
+        else
+            LOGIN_GRAPH_ROUTE_PATTERN,
 ) {
     val navController = appState.navController
     NavHost(
@@ -35,6 +44,17 @@ fun MedicalNavHost(
         startDestination = startDestination,
         modifier = modifier,
     ) {
+        loginGraph(
+            onLoginSuccess = {
+                navController.navigateToHomeGraph(
+                    navOptions = NavOptions.Builder()
+                        .setPopUpTo(LOGIN_GRAPH_ROUTE_PATTERN, true)
+                        .build(),
+                )
+            },
+            windowSizeClass = appState.windowSizeClass,
+        )
+
         homeGraph(
             onStartRecordingClick = navController::navigateToRecordVoice,
             nestedGraphs = {

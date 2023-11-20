@@ -58,7 +58,7 @@ class MainActivity : ComponentActivity() {
     @Inject
     lateinit var analyticsHelper: AnalyticsHelper
 
-    val viewModel: MainActivityViewModel by viewModels()
+    private val viewModel: MainActivityViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         val splashScreen = installSplashScreen()
@@ -113,16 +113,28 @@ class MainActivity : ComponentActivity() {
                 onDispose {}
             }
 
-            CompositionLocalProvider(LocalAnalyticsHelper provides analyticsHelper) {
-                MedicalTheme(
-                    darkTheme = darkTheme,
-                    androidTheme = shouldUseAndroidTheme(uiState),
-                    disableDynamicTheming = shouldDisableDynamicTheming(uiState),
-                ) {
-                    MedicalApp(
-                        networkMonitor = networkMonitor,
-                        windowSizeClass = calculateWindowSizeClass(this),
-                    )
+
+            when (uiState) {
+                Loading -> {
+                    // We are loading the user data, so we don't have any information about the
+                    // user's preferences yet. We can't use the user's preferences to determine
+                    // the theme, so we use the platform theme instead.
+                }
+
+                is Success -> {
+                    CompositionLocalProvider(LocalAnalyticsHelper provides analyticsHelper) {
+                        MedicalTheme(
+                            darkTheme = darkTheme,
+                            androidTheme = shouldUseAndroidTheme(uiState),
+                            disableDynamicTheming = shouldDisableDynamicTheming(uiState),
+                        ) {
+                            MedicalApp(
+                                userData = (uiState as Success).userData,
+                                networkMonitor = networkMonitor,
+                                windowSizeClass = calculateWindowSizeClass(this),
+                            )
+                        }
+                    }
                 }
             }
         }

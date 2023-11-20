@@ -41,6 +41,12 @@ data class UserData(
     val occupation: String,
 )
 
+fun UserData.isLoggedIn(): Boolean {
+    // Assuming that a non-empty name indicates a logged-in user.
+    // Add additional checks as necessary.
+    return name.isNotEmpty()
+}
+
 enum class UserType {
     DOCTOR, PATIENT
 }

@@ -16,6 +16,7 @@
 
 package com.xeladevmobile.medicalassistant.core.data.repository
 
+import com.xeladevmobile.core.network.model.NetworkUser
 import com.xeladevmobile.medicalassistant.core.model.data.DarkThemeConfig
 import com.xeladevmobile.medicalassistant.core.model.data.ThemeBrand
 import com.xeladevmobile.medicalassistant.core.model.data.UserData
@@ -103,4 +104,6 @@ interface UserDataRepository {
      * Sets the user's occupation.
      */
     suspend fun setOccupation(occupation: String)
+
+    suspend fun setUserFromNetwork(userData: UserData)
 }

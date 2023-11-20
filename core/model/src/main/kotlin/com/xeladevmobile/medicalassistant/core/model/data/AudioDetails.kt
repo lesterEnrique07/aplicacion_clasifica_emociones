@@ -1,5 +1,8 @@
 package com.xeladevmobile.medicalassistant.core.model.data
 
+import java.text.SimpleDateFormat
+import java.util.Locale
+
 data class AudioDetails(
     val name: String,
     val extension: String,
@@ -8,6 +11,14 @@ data class AudioDetails(
     val recordDate: String,
     val size: Long,
 )
+
+// Use a SimpleDateFormat to parse the date and then format it
+fun AudioDetails.formattedDate(): String {
+    val parser = SimpleDateFormat("yyyyMMdd'T'HHmmss", Locale.getDefault())
+    val formatter = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+    val date = parser.parse(recordDate)
+    return formatter.format(date)
+}
 
 fun AudioDetails.formattedDuration(): String {
     val minutes = duration / 1000 / 60

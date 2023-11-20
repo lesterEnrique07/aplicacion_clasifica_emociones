@@ -144,6 +144,30 @@ class TestUserDataRepository : UserDataRepository {
         }
     }
 
+    override suspend fun setUserFromNetwork(userData: UserData) {
+        currentUserData.let { current ->
+            _userData.tryEmit(
+                current.copy(
+                    name = userData.name,
+                    address = userData.address,
+                    bornDate = userData.bornDate,
+                    experience = userData.experience,
+                    graduationDate = userData.graduationDate,
+                    occupation = userData.occupation,
+                    sex = userData.sex,
+                    specialty = userData.specialty,
+                    treatmentDate = userData.treatmentDate,
+                    userType = userData.userType,
+                    problemDescription = userData.problemDescription,
+                    shouldHideOnboarding = userData.shouldHideOnboarding,
+                    useDynamicColor = userData.useDynamicColor,
+                    themeBrand = userData.themeBrand,
+                    darkThemeConfig = userData.darkThemeConfig,
+                )
+            )
+        }
+    }
+
     /**
      * A test-only API to allow setting of user data directly.
      */

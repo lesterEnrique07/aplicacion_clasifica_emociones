@@ -206,5 +206,33 @@ class MedicalPreferencesDataSource @Inject constructor(
         }
     }
 
+    suspend fun setUserFromNetwork(networkUser: UserData) {
+        userPreferences.updateData {
+            it.copy {
+                this.name = networkUser.name
+                this.address = networkUser.address
+                this.bornDate = networkUser.bornDate
+                this.experience = networkUser.experience
+                this.graduationDate = networkUser.graduationDate
+                this.occupation = networkUser.occupation
+                this.sex = networkUser.sex
+                this.specialty = networkUser.specialty
+                this.treatmentDate = networkUser.treatmentDate
+                this.userType = when (networkUser.userType) {
+                    UserType.DOCTOR -> DOCTOR
+                    UserType.PATIENT -> PATIENT
+                }
+                this.problemDescription = networkUser.problemDescription
+                this.shouldHideOnboarding = networkUser.shouldHideOnboarding
+                this.useDynamicColor = networkUser.useDynamicColor
+                this.darkThemeConfig = when (networkUser.darkThemeConfig) {
+                    DarkThemeConfig.FOLLOW_SYSTEM ->
+                        DarkThemeConfigProto.DARK_THEME_CONFIG_FOLLOW_SYSTEM
 
+                    DarkThemeConfig.LIGHT -> DarkThemeConfigProto.DARK_THEME_CONFIG_LIGHT
+                    DarkThemeConfig.DARK -> DarkThemeConfigProto.DARK_THEME_CONFIG_DARK
+                }
+            }
+        }
+    }
 }

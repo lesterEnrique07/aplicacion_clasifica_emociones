@@ -32,14 +32,13 @@ import com.xeladevmobile.medicalassistant.core.model.data.audiosPreview
 @Composable
 fun AudioRecordItem(
     audio: Audio,
-    emotion: Emotion, // Enum class representing the different emotions
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     // Define a color based on the emotion
-    val backgroundColor = colorForEmotion(emotion)
+    val backgroundColor = colorForEmotion(audio.emotion)
     // Define an emoji based on the emotion
-    val emoji = emojiForEmotion(emotion)
+    val emoji = emojiForEmotion(audio.emotion)
 
     Card(
         modifier = modifier
@@ -130,6 +129,5 @@ fun AudioRecordItemPreview() {
     AudioRecordItem(
         audio = audiosPreview.first(),
         onClick = {},
-        emotion = Emotion.Neutral,
     )
 }

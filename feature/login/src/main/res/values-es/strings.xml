@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="loading">Cargando</string>
+    <string name="login">Iniciar sesión</string>
+    <string name="login_error">Ha ocurrido un error</string>
+    <string name="email">Correo</string>
+    <string name="password">Contraseña</string>
+    <string name="forgot_password">¿Has olvidado tu contraseña?</string>
+    <string name="toggle_password">Cambiar visibilad de la contraseña</string>
+    <string name="ok">OK</string>
+    <string name="or">O</string>
+</resources>

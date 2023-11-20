@@ -57,6 +57,8 @@ import com.xeladevmobile.medicalassistant.core.designsystem.component.MedicalTop
 import com.xeladevmobile.medicalassistant.core.designsystem.icon.MedicalIcons
 import com.xeladevmobile.medicalassistant.core.designsystem.theme.GradientColors
 import com.xeladevmobile.medicalassistant.core.designsystem.theme.LocalGradientColors
+import com.xeladevmobile.medicalassistant.core.model.data.UserData
+import com.xeladevmobile.medicalassistant.core.model.data.isLoggedIn
 import com.xeladevmobile.medicalassistant.feature.settings.SettingsDialog
 import com.xeladevmobile.medicalassistant.navigation.MedicalNavHost
 import com.xeladevmobile.medicalassistant.navigation.TopLevelDestination
@@ -69,6 +71,7 @@ import com.xeladevmobile.medicalassistant.feature.settings.R as settingsR
 )
 @Composable
 fun MedicalApp(
+    userData: UserData,
     windowSizeClass: WindowSizeClass,
     networkMonitor: NetworkMonitor,
     appState: MedicalAppState = rememberMedicalAppState(
@@ -120,7 +123,7 @@ fun MedicalApp(
                 contentWindowInsets = WindowInsets(0, 0, 0, 0),
                 snackbarHost = { SnackbarHost(snackbarHostState) },
                 bottomBar = {
-                    if (appState.shouldShowBottomBar) {
+                    if (appState.shouldShowBottomBar && userData.isLoggedIn()) {
                         MedicalBottomBar(
                             destinations = appState.topLevelDestinations,
                             onNavigateToDestination = appState::navigateToTopLevelDestination,
@@ -141,7 +144,7 @@ fun MedicalApp(
                             ),
                         ),
                 ) {
-                    if (appState.shouldShowNavRail) {
+                    if (appState.shouldShowNavRail && userData.isLoggedIn()) {
                         MedicalNavRail(
                             destinations = appState.topLevelDestinations,
                             onNavigateToDestination = appState::navigateToTopLevelDestination,
@@ -175,6 +178,7 @@ fun MedicalApp(
                         }
 
                         MedicalNavHost(
+                            userData = userData,
                             appState = appState,
                             onShowSnackbar = { message, action ->
                                 snackbarHostState.showSnackbar(

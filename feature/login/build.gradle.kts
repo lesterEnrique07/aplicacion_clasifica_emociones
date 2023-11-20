@@ -9,7 +9,13 @@ android {
 }
 
 dependencies {
+    implementation(projects.core.data)
+    implementation(projects.core.common)
+    implementation(projects.core.network)
+
+    implementation(libs.androidx.compose.material3.windowSizeClass)
+
+    //implementation(libs.accompanist.flowlayout)
     implementation(libs.kotlinx.datetime)
     implementation(libs.androidx.activity.compose)
-    implementation(libs.accompanist.permissions)
 }
