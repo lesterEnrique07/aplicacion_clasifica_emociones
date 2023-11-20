@@ -15,4 +15,6 @@
     <string name="audio_quality">• Quality: %1$s</string>
     <string name="audio_record_date">• Record Date: %1$s</string>
     <string name="audio_size">• Size: %1$s</string>
+    <string name="analyzing_audio">We are analyzing your recording, please wait…</string>
+    <string name="continue_">Continue</string>
 </resources>

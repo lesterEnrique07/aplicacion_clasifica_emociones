@@ -71,6 +71,8 @@ class MedicalPreferencesDataSource @Inject constructor(
                 graduationDate = it.graduationDate,
                 name = it.name,
                 occupation = it.occupation,
+                patientId = it.patientId,
+                doctorId = it.doctorId,
             )
         }
 
@@ -206,6 +208,22 @@ class MedicalPreferencesDataSource @Inject constructor(
         }
     }
 
+    suspend fun setPatientId(patientId: String) {
+        userPreferences.updateData {
+            it.copy {
+                this.patientId = patientId
+            }
+        }
+    }
+
+    suspend fun setDoctorId(doctorId: String) {
+        userPreferences.updateData {
+            it.copy {
+                this.doctorId = doctorId
+            }
+        }
+    }
+
     suspend fun setUserFromNetwork(networkUser: UserData) {
         userPreferences.updateData {
             it.copy {
@@ -232,6 +250,8 @@ class MedicalPreferencesDataSource @Inject constructor(
                     DarkThemeConfig.LIGHT -> DarkThemeConfigProto.DARK_THEME_CONFIG_LIGHT
                     DarkThemeConfig.DARK -> DarkThemeConfigProto.DARK_THEME_CONFIG_DARK
                 }
+                this.patientId = networkUser.patientId
+                this.doctorId = networkUser.doctorId
             }
         }
     }

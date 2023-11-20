@@ -37,17 +37,19 @@ message UserPreferences {
   string address = 10;
 
   // Patient
-  string problemDescription = 11;
-  string treatmentDate = 12;
+  string patientId = 11;
+  string problemDescription = 12;
+  string treatmentDate = 13;
 
   // Doctor
-  string specialty = 13;
-  string graduationDate = 14;
-  string experience = 15;
-  string occupation = 16;
-  UserTypeProto user_type = 17;
+  string doctorId = 14;
+  string specialty = 15;
+  string graduationDate = 16;
+  string experience = 17;
+  string occupation = 18;
+  UserTypeProto user_type = 19;
 
-  // NEXT AVAILABLE ID: 18
+  // NEXT AVAILABLE ID: 20
 }
 
 enum UserTypeProto {

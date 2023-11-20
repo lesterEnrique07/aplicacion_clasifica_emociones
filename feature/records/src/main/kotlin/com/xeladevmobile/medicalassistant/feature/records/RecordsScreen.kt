@@ -52,7 +52,7 @@ import com.xeladevmobile.medicalassistant.core.ui.DevicePreviews
 @Composable
 internal fun RecordsScreenRoute(
     modifier: Modifier = Modifier,
-    onElementClicked: (Audio) -> Unit,
+    onElementClicked: (String) -> Unit,
     viewModel: RecordsViewModel = hiltViewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -68,7 +68,7 @@ internal fun RecordsScreenRoute(
 @Composable
 internal fun RecordsScreen(
     modifier: Modifier = Modifier,
-    onElementClicked: (Audio) -> Unit,
+    onElementClicked: (String) -> Unit,
     uiState: RecordsUiState,
 ) {
     when (uiState) {
@@ -89,7 +89,7 @@ internal fun RecordsScreen(
                     items(audioList) { audio ->
                         AudioRecordItem(
                             audio = audio,
-                            onClick = { onElementClicked(audio) },
+                            onClick = { onElementClicked(audio.id) },
                         )
                     }
                 }

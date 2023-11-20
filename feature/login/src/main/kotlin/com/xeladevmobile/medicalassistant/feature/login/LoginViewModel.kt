@@ -24,6 +24,7 @@ import com.xeladevmobile.core.network.model.networkUserForTestWithDoctor
 import com.xeladevmobile.core.network.model.networkUserForTestWithPatient
 import com.xeladevmobile.medicalassistant.core.data.model.asUserData
 import com.xeladevmobile.medicalassistant.core.data.repository.UserDataRepository
+import com.xeladevmobile.medicalassistant.core.domain.InsertPatientUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
@@ -37,6 +38,7 @@ import javax.inject.Inject
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     private val userDataRepository: UserDataRepository,
+    private val insertPatientUseCase: InsertPatientUseCase,
 ) : ViewModel() {
     private val shouldShowOnboarding: Flow<Boolean> =
         userDataRepository.userData.map { !it.shouldHideOnboarding }
@@ -51,9 +53,11 @@ class LoginViewModel @Inject constructor(
             delay(2000)
             if (username == "alexminator@gmail.com" && password == "12345678") {
                 userDataRepository.setUserFromNetwork(networkUserForTestWithPatient.asUserData())
+                insertPatientUseCase(networkUserForTestWithPatient.asUserData())
                 _uiState.emit(LoginUiState.Success(networkUserData = networkUserForTestWithPatient))
             } else if (username == "josefeliciano" && password == "12345678") {
                 userDataRepository.setUserFromNetwork(networkUserForTestWithDoctor.asUserData())
+                insertPatientUseCase(networkUserForTestWithDoctor.asUserData())
                 _uiState.emit(LoginUiState.Success(networkUserData = networkUserForTestWithDoctor))
             } else {
                 _uiState.emit(LoginUiState.Error("Usuario o contraseña incorrectos"))

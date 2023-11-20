@@ -1,11 +1,12 @@
 package com.xeladevmobile.medicalassistant.feature.voice
 
-import android.media.MediaRecorder
+import android.media.AudioFormat
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.github.squti.androidwaverecorder.WaveRecorder
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -20,7 +21,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class VoiceViewModel @Inject constructor() : ViewModel() {
-    private var mediaRecorder: MediaRecorder? = null
+    private var mediaRecorder: WaveRecorder? = null
 
     private val _uiState = MutableStateFlow<VoiceUiState>(VoiceUiState.Stopped)
     val uiState: StateFlow<VoiceUiState> = _uiState.asStateFlow()
@@ -36,52 +37,42 @@ class VoiceViewModel @Inject constructor() : ViewModel() {
     private var tickerJob: Job? = null
 
     fun startRecording(cacheFileDirectory: String) = viewModelScope.launch {
-        filePath = "$cacheFileDirectory/recording_$audioId.3gp"
+        filePath = "$cacheFileDirectory/recording_$audioId.wav"
 
-        mediaRecorder = MediaRecorder().apply {
-            setAudioSource(MediaRecorder.AudioSource.MIC)
-            setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP)
-            setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB)
-
-            // Specify the file path and name for the recording
-            setOutputFile(filePath)
-
-            try {
-                prepare()
-                start()
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
+        mediaRecorder = WaveRecorder(filePath!!).apply {
+            waveConfig.sampleRate = 44100
+            waveConfig.channels = AudioFormat.CHANNEL_IN_STEREO
+            waveConfig.audioEncoding = AudioFormat.ENCODING_PCM_8BIT
         }
-        _uiState.emit(VoiceUiState.Recording)
+        mediaRecorder?.startRecording()
         startTimer()
+        _uiState.emit(VoiceUiState.Recording)
     }
 
     fun pauseRecording() = viewModelScope.launch {
-        mediaRecorder?.pause()
+        mediaRecorder?.pauseRecording()
         _uiState.emit(VoiceUiState.Paused)
         pauseTimer() // Pause the timer instead of stopping it
     }
 
     fun resumeRecording() = viewModelScope.launch {
-        mediaRecorder?.resume()
+        mediaRecorder?.resumeRecording()
         _uiState.emit(VoiceUiState.Recording)
         startTimer()
     }
 
     fun stopRecording() = viewModelScope.launch {
-        mediaRecorder?.apply {
-            stop()
-            release()
-        }
+        mediaRecorder?.stopRecording()
         mediaRecorder = null
         _uiState.emit(VoiceUiState.RecordSuccess(audioId.toString()))
         stopTimer()
     }
 
     fun cancelRecording() {
-        stopRecording()
-        File(filePath).delete()
+        mediaRecorder?.stopRecording()
+        mediaRecorder = null
+        filePath?.let { File(it).delete() }
+        stopTimer()
     }
 
     private fun startTimer() {

@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="records">Records</string>
+    <string name="duration">Duration: %1$s</string>
+    <string name="created">Created: %1$s</string>
 </resources>

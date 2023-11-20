@@ -16,6 +16,8 @@
 
 package com.xeladevmobile.medicalassistant.core.model.data
 
+import java.util.UUID
+
 /**
  * Class summarizing user interest data
  */
@@ -31,10 +33,12 @@ data class UserData(
     val userType: UserType,
 
     // Patient
+    val patientId: String,
     val problemDescription: String,
     val treatmentDate: String,
 
     // Doctor
+    val doctorId: String,
     val specialty: String,
     val graduationDate: String,
     val experience: String,
@@ -67,6 +71,8 @@ val patientUserData = UserData(
     graduationDate = "",
     experience = "",
     occupation = "",
+    patientId = UUID.randomUUID().toString(),
+    doctorId = "",
 )
 
 // Mock doctor data
@@ -82,8 +88,10 @@ val doctorUserData = UserData(
     userType = UserType.DOCTOR,
     specialty = "Pediatrics",
     graduationDate = "2000-06-20",
-    experience = "20 years",
+    experience = "20",
     occupation = "Pediatrician",
     problemDescription = "",
     treatmentDate = "",
+    patientId = "",
+    doctorId = UUID.randomUUID().toString(),
 )

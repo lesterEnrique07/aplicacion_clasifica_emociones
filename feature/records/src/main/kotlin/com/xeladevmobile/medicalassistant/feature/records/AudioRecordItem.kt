@@ -19,6 +19,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -62,11 +63,11 @@ fun AudioRecordItem(
                     style = MaterialTheme.typography.titleMedium,
                 )
                 Text(
-                    text = "Duration: ${formatDuration(audio.duration)}",
+                    text = stringResource(R.string.duration, formatDuration(audio.duration)),
                     style = MaterialTheme.typography.bodyMedium,
                 )
                 Text(
-                    text = "Created: ${formatCreatedDate(audio.createdDate)}",
+                    text = stringResource(R.string.created, formatCreatedDate(audio.createdDate)),
                     style = MaterialTheme.typography.bodySmall,
                 )
             }
@@ -80,10 +81,11 @@ fun AudioRecordItem(
 fun colorForEmotion(emotion: Emotion): Color {
     return when (emotion) {
         Emotion.Neutral -> Color(0xFF8D8989)
-        Emotion.Angry -> Color(0xFFE53935) // A darker red for better contrast
+        Emotion.Anger -> Color(0xFFE53935) // A darker red for better contrast
         Emotion.Happiness -> Color(0xFF968022) // A golden shade for better contrast
         Emotion.Disgust -> Color(0xFF4CAF50) // A darker green for better contrast
         Emotion.Fear -> Color(0xFFC542DB) // A darker purple for better contrast
+        Emotion.Sadness -> Color(0xFF2196F3) // A darker blue for better contrast
     }
 }
 
@@ -91,10 +93,11 @@ fun colorForEmotion(emotion: Emotion): Color {
 fun emojiForEmotion(emotion: Emotion): String {
     return when (emotion) {
         Emotion.Neutral -> "😐"
-        Emotion.Angry -> "😠"
+        Emotion.Anger -> "😠"
         Emotion.Happiness -> "😄"
         Emotion.Disgust -> "🤢"
         Emotion.Fear -> "😨"
+        Emotion.Sadness -> "😢"
     }
 }
 

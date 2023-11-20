@@ -20,6 +20,7 @@ package com.xeladevmobile.core.network.model
 
 import com.xeladevmobile.medicalassistant.core.model.data.UserType
 import kotlinx.serialization.Serializable
+import java.util.UUID
 
 @Serializable
 data class NetworkUser(
@@ -30,10 +31,12 @@ data class NetworkUser(
     val userType: UserType,
 
     // Patient
+    val patientId: String,
     val problemDescription: String,
     val treatmentDate: String,
 
     // Doctor
+    val doctorId: String,
     val specialty: String,
     val graduationDate: String,
     val experience: String,
@@ -52,6 +55,8 @@ val networkUserForTestWithPatient = NetworkUser(
     graduationDate = "",
     experience = "",
     occupation = "",
+    patientId = UUID.randomUUID().toString(),
+    doctorId = "",
 )
 
 val networkUserForTestWithDoctor = NetworkUser(
@@ -66,4 +71,6 @@ val networkUserForTestWithDoctor = NetworkUser(
     graduationDate = "2020-09-09",
     experience = "2 años",
     occupation = "Neurólogo",
+    patientId = "",
+    doctorId = UUID.randomUUID().toString(),
 )

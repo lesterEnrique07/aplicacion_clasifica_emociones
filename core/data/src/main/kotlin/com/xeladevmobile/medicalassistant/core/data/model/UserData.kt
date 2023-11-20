@@ -21,4 +21,6 @@ fun NetworkUser.asUserData() = UserData(
     occupation = this.occupation,
     useDynamicColor = false,
     shouldHideOnboarding = false,
+    patientId = this.patientId,
+    doctorId = this.doctorId,
 )

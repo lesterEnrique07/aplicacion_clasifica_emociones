@@ -16,17 +16,14 @@
 
 package com.xeladevmobile.medicalassistant.core.analytics
 
-import com.google.firebase.analytics.ktx.analytics
+import dagger.Binds
+import dagger.Module
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 
-/*@Module
+@Module
 @InstallIn(SingletonComponent::class)
 abstract class AnalyticsModule {
     @Binds
-    abstract fun bindsAnalyticsHelper(analyticsHelperImpl: FirebaseAnalyticsHelper): AnalyticsHelper
-
-    companion object {
-        @Provides
-        @Singleton
-        fun provideFirebaseAnalytics(): FirebaseAnalytics { return Firebase.analytics }
-    }
-}*/
+    abstract fun bindsAnalyticsHelper(analyticsHelperImpl: StubAnalyticsHelper): AnalyticsHelper
+}

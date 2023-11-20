@@ -25,6 +25,7 @@ import kotlinx.coroutines.channels.BufferOverflow.DROP_OLDEST
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.filterNotNull
+import java.util.UUID
 
 val emptyUserData = UserData(
     themeBrand = ThemeBrand.DEFAULT,
@@ -42,6 +43,8 @@ val emptyUserData = UserData(
     specialty = "Cardiologist",
     treatmentDate = "",
     userType = UserType.DOCTOR,
+    patientId = "",
+    doctorId = UUID.randomUUID().toString(),
 )
 
 class TestUserDataRepository : UserDataRepository {
@@ -163,7 +166,7 @@ class TestUserDataRepository : UserDataRepository {
                     useDynamicColor = userData.useDynamicColor,
                     themeBrand = userData.themeBrand,
                     darkThemeConfig = userData.darkThemeConfig,
-                )
+                ),
             )
         }
     }

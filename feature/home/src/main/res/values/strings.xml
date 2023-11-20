@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="home">Home</string>
+    <string name="welcome_to_medical_assistant">Welcome to Medical Assistant%1$s</string>
+    <string name="we_are_loading_your_data">. We are loading your data.</string>
+    <string name="start_recording_your_audio">Start recording your audio</string>
+    <string name="start_recording_description">Press the button below to start recording. All records are completely private and will be stored in your device.</string>
+    <string name="start_recording">Start recording</string>
 </resources>

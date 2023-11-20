@@ -30,13 +30,13 @@ fun NavController.navigateToPlayRecordVoice(audioId: String) {
     }
 }
 
-fun NavGraphBuilder.playVoiceRecordScreen(onBackClick: () -> Unit) {
+fun NavGraphBuilder.playVoiceRecordScreen(onBackClick: () -> Unit, onFinishClick: () -> Unit) {
     composable(
         route = "$voicePlayRecordingRoute/{$audioIdArg}",
         arguments = listOf(
             navArgument(audioIdArg) { type = NavType.StringType },
         ),
     ) {
-        PlaybackScreenRoute(onBackClick = onBackClick)
+        PlaybackScreenRoute(onBackClick = onBackClick, onFinishClick = onFinishClick)
     }
 }

@@ -4,7 +4,6 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
-import com.xeladevmobile.medicalassistant.core.model.data.Audio
 import com.xeladevmobile.medicalassistant.feature.records.RecordsScreenRoute
 
 const val recordsScreenRoute = "records_screen_route"
@@ -15,7 +14,7 @@ fun NavController.navigateToRecords(navOptions: NavOptions? = null) {
     this.navigate(recordsScreenRoute, navOptions)
 }
 
-fun NavGraphBuilder.recordsScreen(onElementClicked: (Audio) -> Unit) {
+fun NavGraphBuilder.recordsScreen(onElementClicked: (String) -> Unit) {
     composable(
         route = recordsScreenRoute,
     ) {

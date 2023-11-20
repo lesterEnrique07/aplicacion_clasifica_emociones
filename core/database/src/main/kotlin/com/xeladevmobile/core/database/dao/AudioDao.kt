@@ -26,7 +26,7 @@ interface AudioDao {
 
     // Query to retrieve a single audio by its id
     @Query("SELECT * FROM audio WHERE id = :audioId")
-    fun getAudioById(audioId: String): Flow<AudioEntity>
+    fun getAudioById(audioId: String): Flow<AudioEntity?>
 
     // Query to retrieve all audios
     @Query("SELECT * FROM audio")

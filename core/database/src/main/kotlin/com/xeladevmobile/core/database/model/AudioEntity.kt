@@ -34,6 +34,7 @@ data class AudioEntity(
 )
 
 fun AudioEntity.asExternalModel() = Audio(
+    id = id,
     extension = extension,
     duration = duration,
     path = path,

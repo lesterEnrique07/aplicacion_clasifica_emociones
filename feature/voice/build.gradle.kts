@@ -12,4 +12,5 @@ dependencies {
     implementation(libs.kotlinx.datetime)
     implementation(libs.androidx.activity.compose)
     implementation(libs.accompanist.permissions)
+    implementation(libs.github.waverecorder)
 }

@@ -8,6 +8,7 @@ import com.xeladevmobile.medicalassistant.core.model.data.UserData
 import com.xeladevmobile.medicalassistant.core.model.data.isLoggedIn
 import com.xeladevmobile.medicalassistant.feature.home.navigation.HOME_GRAPH_ROUTE_PATTERN
 import com.xeladevmobile.medicalassistant.feature.home.navigation.homeGraph
+import com.xeladevmobile.medicalassistant.feature.home.navigation.homeScreenRoute
 import com.xeladevmobile.medicalassistant.feature.home.navigation.navigateToHomeGraph
 import com.xeladevmobile.medicalassistant.feature.login.navigation.LOGIN_GRAPH_ROUTE_PATTERN
 import com.xeladevmobile.medicalassistant.feature.login.navigation.loginGraph
@@ -15,6 +16,7 @@ import com.xeladevmobile.medicalassistant.feature.me.navigation.profileScreen
 import com.xeladevmobile.medicalassistant.feature.playback.navigation.navigateToPlayRecordVoice
 import com.xeladevmobile.medicalassistant.feature.playback.navigation.playVoiceRecordScreen
 import com.xeladevmobile.medicalassistant.feature.records.navigation.recordsScreen
+import com.xeladevmobile.medicalassistant.feature.records.navigation.recordsScreenRoute
 import com.xeladevmobile.medicalassistant.feature.voice.navigation.navigateToRecordVoice
 import com.xeladevmobile.medicalassistant.feature.voice.navigation.voiceRecordScreen
 import com.xeladevmobile.medicalassistant.ui.MedicalAppState
@@ -65,16 +67,27 @@ fun MedicalNavHost(
 
                 playVoiceRecordScreen(
                     onBackClick = {
+                        if (navController.previousBackStackEntry?.destination?.route == recordsScreenRoute)
+                            navController.popBackStack()
+                        else {
+                            navController.navigateToHomeGraph(
+                                navOptions = NavOptions.Builder()
+                                    .setPopUpTo(homeScreenRoute, true)
+                                    .build(),
+                            )
+                        }
+                    },
+                    onFinishClick = {
                         navController.navigateToHomeGraph(
                             navOptions = NavOptions.Builder()
-                                .setPopUpTo(HOME_GRAPH_ROUTE_PATTERN, true)
+                                .setPopUpTo(homeScreenRoute, true)
                                 .build(),
                         )
                     },
                 )
             },
         )
-        recordsScreen(onElementClicked = { })
+        recordsScreen(onElementClicked = navController::navigateToPlayRecordVoice)
         profileScreen()
     }
 }

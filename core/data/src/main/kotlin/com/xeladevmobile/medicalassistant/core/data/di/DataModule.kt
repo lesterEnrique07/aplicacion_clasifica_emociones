@@ -16,9 +16,13 @@
 
 package com.xeladevmobile.medicalassistant.core.data.di
 
+import com.xeladevmobile.medicalassistant.core.data.repository.AnalyzeAudioRepository
+import com.xeladevmobile.medicalassistant.core.data.repository.AnalyzeAudioRepositoryImpl
 import com.xeladevmobile.medicalassistant.core.data.repository.AudioRecordsRepository
 import com.xeladevmobile.medicalassistant.core.data.repository.OfflineFirstAudioRecordsRepository
+import com.xeladevmobile.medicalassistant.core.data.repository.OfflineFirstPatientRepository
 import com.xeladevmobile.medicalassistant.core.data.repository.OfflineFirstUserDataRepository
+import com.xeladevmobile.medicalassistant.core.data.repository.PatientRepository
 import com.xeladevmobile.medicalassistant.core.data.repository.UserDataRepository
 import com.xeladevmobile.medicalassistant.core.data.util.ConnectivityManagerNetworkMonitor
 import com.xeladevmobile.medicalassistant.core.data.util.NetworkMonitor
@@ -45,4 +49,14 @@ interface DataModule {
     fun bindsNetworkMonitor(
         networkMonitor: ConnectivityManagerNetworkMonitor,
     ): NetworkMonitor
+
+    @Binds
+    fun bindsAudioAnalysisRepository(
+        audioAnalysisRepository: AnalyzeAudioRepositoryImpl,
+    ): AnalyzeAudioRepository
+
+    @Binds
+    fun bindsPatientRepository(
+        patientRepository: OfflineFirstPatientRepository,
+    ): PatientRepository
 }

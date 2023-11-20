@@ -8,13 +8,19 @@ import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.xeladevmobile.medicalassistant.core.data.repository.AnalyzeAudioRepository
+import com.xeladevmobile.medicalassistant.core.data.repository.UserDataRepository
 import com.xeladevmobile.medicalassistant.core.data.util.AudioManager
+import com.xeladevmobile.medicalassistant.core.domain.GetAudioRecordUseCase
+import com.xeladevmobile.medicalassistant.core.domain.InsertAudioUseCase
 import com.xeladevmobile.medicalassistant.core.model.data.AudioDetails
 import com.xeladevmobile.medicalassistant.feature.playback.navigation.PlaybackArgs
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.launch
 import java.io.File
 import javax.inject.Inject
@@ -23,6 +29,10 @@ import javax.inject.Inject
 class PlaybackViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     private val audioManager: AudioManager,
+    private val audioAnalyzeAudioRepository: AnalyzeAudioRepository,
+    private val insertAudioUseCase: InsertAudioUseCase,
+    private val userDataRepository: UserDataRepository,
+    private val getAudioRecordsUseCase: GetAudioRecordUseCase,
 ) : ViewModel() {
     private val playbackArgs: PlaybackArgs = PlaybackArgs(savedStateHandle)
 
@@ -64,10 +74,16 @@ class PlaybackViewModel @Inject constructor(
     }
 
     fun setFilePath(cachePath: String) {
-        filePath = "$cachePath/recording_$audioId.3gp"
+        filePath = "$cachePath/recording_$audioId.wav"
 
         viewModelScope.launch {
-            _audioDetails.emit(getAudioDetails(filePath))
+            val result = getAudioRecordsUseCase(audioId).firstOrNull()
+            if (result != null) {
+                val audioDetails = getAudioDetails(result.path).copy(emotion = result.emotion)
+                _audioDetails.emit(audioDetails)
+            } else {
+                _audioDetails.emit(getAudioDetails(filePath))
+            }
             loadAudioAmplitudes(filePath)
         }
     }
@@ -137,7 +153,7 @@ class PlaybackViewModel @Inject constructor(
 
         retriever.setDataSource(filePath)
 
-        val duration = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION)?.toLongOrNull() ?: 0L
+        val duration = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION)?.toIntOrNull() ?: 0
         val quality = retrieveQuality(retriever)
         val recordDate = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DATE) ?: ""
         val size = file.length()
@@ -181,6 +197,17 @@ class PlaybackViewModel @Inject constructor(
         val currentPosition = mediaPlayer?.currentPosition ?: 0
         val totalDuration = mediaPlayer?.duration?.toFloat() ?: 1f
         return (currentPosition / totalDuration).coerceIn(0f, 1f)
+    }
+
+    fun analyzeAudio() {
+        viewModelScope.launch {
+            _uiState.emit(PlaybackUiState.Loading)
+            val result = audioAnalyzeAudioRepository.analyzeAudio(filePath)
+            userDataRepository.userData.collectLatest {
+                insertAudioUseCase(filePath, patientId = it.patientId, emotion = result)
+                _uiState.emit(PlaybackUiState.Analyzed(result))
+            }
+        }
     }
 
     override fun onCleared() {

@@ -1,12 +1,14 @@
 package com.xeladevmobile.medicalassistant.core.model.data
 
 import java.text.SimpleDateFormat
+import java.util.Calendar
 import java.util.Locale
 
 data class AudioDetails(
+    val emotion: Emotion? = null,
     val name: String,
     val extension: String,
-    val duration: Long,
+    val duration: Int,
     val quality: String,
     val recordDate: String,
     val size: Long,
@@ -16,8 +18,12 @@ data class AudioDetails(
 fun AudioDetails.formattedDate(): String {
     val parser = SimpleDateFormat("yyyyMMdd'T'HHmmss", Locale.getDefault())
     val formatter = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-    val date = parser.parse(recordDate)
-    return formatter.format(date)
+    val date = try {
+        parser.parse(recordDate)
+    } catch (e: Exception) {
+        null
+    }
+    return formatter.format(date ?: Calendar.getInstance().time)
 }
 
 fun AudioDetails.formattedDuration(): String {

@@ -6,8 +6,8 @@ import java.util.Locale
 
 // Utility function to convert duration to a formatted string (e.g., "07:13")
 fun formatDuration(seconds: Int): String {
-    val minutes = seconds / 60
-    val remainingSeconds = seconds % 60
+    val minutes = seconds / 1000 / 60
+    val remainingSeconds = seconds / 1000 % 60
     return String.format(Locale.getDefault(), "%02d:%02d", minutes, remainingSeconds)
 }
 

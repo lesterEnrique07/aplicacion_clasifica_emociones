@@ -28,6 +28,7 @@ import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Retrofit
+import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.Part
@@ -43,7 +44,7 @@ private interface RetrofitNiaNetworkApi {
     @POST("predict/gender")
     suspend fun predictGender(
         @Part file: MultipartBody.Part,
-    ): NetworkResponse<NetworkSimplePrediction>
+    ): String
 
     @Multipart
     @POST("predict/gender/percents")
@@ -55,7 +56,7 @@ private interface RetrofitNiaNetworkApi {
     @POST("predict/emotion")
     suspend fun predictEmotion(
         @Part file: MultipartBody.Part,
-    ): NetworkResponse<NetworkSimplePrediction>
+    ): String
 
     @Multipart
     @POST("predict/emotion/percents")
@@ -86,6 +87,7 @@ class RetrofitMedicalNetwork @Inject constructor(
     private val networkApi = Retrofit.Builder()
         .baseUrl(MEDICAL_BASE_URL)
         .callFactory(okhttpCallFactory)
+        .addConverterFactory(ScalarsConverterFactory.create())
         .addConverterFactory(
             networkJson.asConverterFactory("application/json".toMediaType()),
         )
@@ -93,7 +95,8 @@ class RetrofitMedicalNetwork @Inject constructor(
         .create(RetrofitNiaNetworkApi::class.java)
 
     override suspend fun predictGender(file: File): NetworkSimplePrediction {
-        return networkApi.predictGender(file.toMultipartBodyPart()).data
+        val prediction = networkApi.predictGender(file.toMultipartBodyPart())
+        return NetworkSimplePrediction(prediction)
     }
 
     override suspend fun predictGenderPercents(file: File): NetworkDetailedResponse {
@@ -101,7 +104,8 @@ class RetrofitMedicalNetwork @Inject constructor(
     }
 
     override suspend fun predictEmotion(file: File): NetworkSimplePrediction {
-        return networkApi.predictEmotion(file.toMultipartBodyPart()).data
+        val prediction = networkApi.predictEmotion(file.toMultipartBodyPart())
+        return NetworkSimplePrediction(prediction)
     }
 
     override suspend fun predictEmotionPercents(file: File): NetworkDetailedResponse {

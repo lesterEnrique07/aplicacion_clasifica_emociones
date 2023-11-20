@@ -1,11 +1,15 @@
 package com.xeladevmobile.medicalassistant.feature.playback
 
+import com.xeladevmobile.medicalassistant.core.model.data.Audio
+import com.xeladevmobile.medicalassistant.core.model.data.Emotion
+
 sealed interface PlaybackUiState {
+    data class Analyzed(val result: Emotion) : PlaybackUiState
     data object Stopped : PlaybackUiState
     data object Playing : PlaybackUiState
     data object Paused : PlaybackUiState
-
-    data object Ready : PlaybackUiState
+    data object Loading : PlaybackUiState
+    data class AudioFileLoaded(val audio: Audio) : PlaybackUiState
 }
 
 val PlaybackUiState.isPlaying: Boolean

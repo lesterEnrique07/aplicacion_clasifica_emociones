@@ -1,4 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="profile">Profile</string>
+    <string name="graduation">Graduation: %1$s</string>
+    <string name="date_of_birth">Date of Birth: %1$s</string>
+    <string name="graduation_date">Graduation Date</string>
+    <string name="work_icon">Work Icon</string>
+    <string name="picture">Picture</string>
+    <string name="experience">Experience</string>
+    <string name="sex">Sex: %1$s</string>
+    <string name="address">Address: %1$s</string>
+    <string name="address_content_description">Address</string>
+    <string name="personal_details">Personal Details</string>
+    <string name="name">Name %1$s</string>
+    <string name="treatment_date">Treatment Date: %1$s</string>
+    <string name="problem">Problem: %1$s</string>
+    <string name="problem_description">Problem Description</string>
+    <string name="doctor_information">Doctor Information</string>
+    <string name="occupation">Occupation</string>
+    <string name="occupation_content">Occupation: %1$s</string>
+    <string name="specialty">Specialty: %1$s</string>
+    <string name="specialty_description">Specialty</string>
+    <string name="patient_information">Patient Information</string>
 </resources>

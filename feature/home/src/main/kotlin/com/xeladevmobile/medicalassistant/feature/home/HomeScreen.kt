@@ -33,6 +33,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.ParagraphStyle
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -169,15 +170,15 @@ internal fun InitRecordCard(userData: UserData?, image: String, onStartRecording
                     verticalArrangement = Arrangement.Center,
                 ) {
                     val username = if (userData == null)
-                        ". We are loading your data."
+                        stringResource(R.string.we_are_loading_your_data)
                     else " ${userData.name}."
                     Text(
-                        text = "Welcome to Medical Assistant$username",
+                        text = stringResource(R.string.welcome_to_medical_assistant, username),
                         style =
                         typography.headlineMedium,
                     )
                     Text(
-                        text = "Start recording your audio", style = typography.bodyMedium,
+                        text = stringResource(R.string.start_recording_your_audio), style = typography.bodyMedium,
                         modifier = Modifier
                             .padding(top = 8.dp, bottom = 8.dp),
                     )
@@ -185,7 +186,7 @@ internal fun InitRecordCard(userData: UserData?, image: String, onStartRecording
             }
 
             Text(
-                text = "Press the button below to start recording. All records are completely private and will be stored in your device.",
+                text = stringResource(R.string.start_recording_description),
                 style = typography.bodyMedium,
                 modifier = Modifier.padding(16.dp),
             )
@@ -218,7 +219,7 @@ internal fun InitRecordCard(userData: UserData?, image: String, onStartRecording
                         .padding(16.dp)
                         .align(Alignment.CenterVertically),
                 ) {
-                    Text(text = "Start recording")
+                    Text(text = stringResource(R.string.start_recording))
                 }
             }
         }

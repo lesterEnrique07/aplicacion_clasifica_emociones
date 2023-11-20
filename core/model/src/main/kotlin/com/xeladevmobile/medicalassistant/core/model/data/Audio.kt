@@ -3,8 +3,10 @@ package com.xeladevmobile.medicalassistant.core.model.data
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import java.util.UUID
 
 data class Audio(
+    val id: String,
     val extension: String,
     val duration: Int,
     val path: String,
@@ -13,7 +15,7 @@ data class Audio(
 )
 
 enum class Emotion {
-    Neutral, Angry, Happiness, Disgust, Fear
+    Neutral, Anger, Happiness, Disgust, Fear, Sadness
 }
 
 fun List<Audio>.groupByCreatedDate(): Map<String, List<Audio>> {
@@ -28,15 +30,12 @@ fun List<Audio>.calculateStatistics(): List<PatientStatistics> {
     val emotionCount = this.groupingBy { it.emotion }.eachCount()
     val averageDurationPerEmotion = this.groupBy { it.emotion }
         .mapValues { (_, audios) ->
-            audios.map { it.duration }.average()
+            audios.map { it.duration / 1000.0 }.average() // Convert milliseconds to seconds
         }
     val longestRecording = this.maxByOrNull { it.duration }
     val shortestRecording = this.minByOrNull { it.duration }
 
-    // Assuming a function that calculates the trend of emotions over time
     val emotionTrend = calculateEmotionTrend(this)
-
-    // Assuming a function that calculates the diversity of emotions
     val emotionDiversity = calculateEmotionDiversity(this)
 
     val emotionCountFormatted = emotionCount.entries.joinToString(separator = "\n") {
@@ -44,69 +43,70 @@ fun List<Audio>.calculateStatistics(): List<PatientStatistics> {
     }
 
     val averageDurationFormatted = averageDurationPerEmotion.entries.joinToString(separator = "\n") {
-        "• ${it.key}: ${String.format("%.2f sec", it.value)}"
+        "• ${it.key}: ${String.format("%.2f seg", it.value)}"
     }
 
     val longestRecordingFormatted = longestRecording?.let {
-        "• Emotion: ${it.emotion}\n• Duration: ${it.duration} sec"
-    } ?: "Not available"
+        "• Emoción: ${it.emotion}\n• Duración: ${it.duration / 1000} seg"
+    } ?: "No disponible"
 
     val shortestRecordingFormatted = shortestRecording?.let {
-        "• Emotion: ${it.emotion}\n• Duration: ${it.duration} sec"
-    } ?: "Not available"
+        "• Emoción: ${it.emotion}\n• Duración: ${it.duration / 1000} seg"
+    } ?: "No disponible"
 
     val mostCommonEmotion = emotionCount.maxByOrNull { it.value }
     val mostCommonEmotionContextualMessage = when (mostCommonEmotion?.key) {
-        Emotion.Angry -> "Anger can be a powerful motivator. It's important to find healthy outlets for this energy."
-        Emotion.Happiness -> "Happiness is contagious. Spread joy with your presence."
-        Emotion.Disgust -> "Disgust can be a natural response to unpleasant experiences. Reflect on what can be learned from these feelings."
-        Emotion.Fear -> "Fear can protect us, but it can also hinder us. Face your fears with courage and grow stronger."
-        Emotion.Neutral -> "A calm sea does not make a skilled sailor. Embrace the waves of emotion."
-        else -> "Emotions are complex, each one tells us something about ourselves."
+        Emotion.Anger -> "La ira puede ser un poderoso motivador. Es importante encontrar salidas saludables para esta energía."
+        Emotion.Happiness -> "La felicidad es contagiosa. Comparte alegría con tu presencia."
+        Emotion.Disgust -> "El asco puede ser una respuesta natural a experiencias desagradables. Reflexiona sobre lo que se puede aprender de estos sentimientos."
+        Emotion.Fear -> "El miedo nos puede proteger, pero también puede obstaculizarnos. Enfréntate a tus miedos con valentía y crece más fuerte."
+        Emotion.Neutral -> "Un mar en calma no hace un marinero hábil. Acepta las olas de emoción."
+        Emotion.Sadness -> "La tristeza es una parte natural de la vida. Aprende a aceptarla y a dejarla ir."
+        else -> "Las emociones son complejas, cada una nos dice algo sobre nosotros mismos."
     }
 
     return listOf(
         PatientStatistics(
-            header = "Most Common Emotion",
-            description = "The most frequently recorded emotion",
-            value = "• Emotion: ${mostCommonEmotion?.key}\n• Total times: ${mostCommonEmotion?.value}\n\n$mostCommonEmotionContextualMessage",
-            updatedAt = "2023-04-01",
+            header = "Emoción Más Común",
+            description = "La emoción grabada con más frecuencia",
+            value = "• Emoción: ${mostCommonEmotion?.key}\n• Total de veces: ${mostCommonEmotion?.value}\n\n$mostCommonEmotionContextualMessage",
+            updatedAt = "2023-11-20",
         ),
         PatientStatistics(
-            header = "Average Duration per Emotion",
-            description = "Average duration of recordings for each emotion",
+            header = "Duración Promedio por Emoción",
+            description = "Duración promedio de las grabaciones para cada emoción",
             value = averageDurationFormatted,
-            updatedAt = "2023-04-01",
+            updatedAt = "2023-11-20",
         ),
         PatientStatistics(
-            header = "Distribution of Emotions",
-            description = "Counts of each emotion recorded",
+            header = "Distribución de Emociones",
+            description = "Cantidad de cada emoción grabada",
             value = emotionCountFormatted,
-            updatedAt = "2023-04-01",
+            updatedAt = "2023-11-20",
         ),
         PatientStatistics(
-            header = "Longest Recording",
-            description = "The longest audio recording and its emotion",
+            header = "Grabación Más Larga",
+            description = "La grabación de audio más larga y su emoción",
             value = longestRecordingFormatted,
-            updatedAt = "2023-04-01",
+            updatedAt = "2023-11-20",
         ),
         PatientStatistics(
-            header = "Shortest Recording",
-            description = "The shortest audio recording and its emotion",
+            header = "Grabación Más Corta",
+            description = "La grabación de audio más corta y su emoción",
             value = shortestRecordingFormatted,
-            updatedAt = "2023-04-01",
+            updatedAt = "2023-11-20",
         ),
         PatientStatistics(
-            header = "Emotion Trend Over Time",
-            description = "How emotions have varied over time",
+            header = "Tendencia de Emoción a lo Largo del Tiempo",
+            description = "Cómo han variado las emociones a lo largo del tiempo",
             value = emotionTrend,
-            updatedAt = "2023-04-01",
+            updatedAt = "2023-11-20",
         ),
         PatientStatistics(
-            header = "Emotion Diversity",
-            description = "The diversity of emotions recorded",
+            header = "Diversidad de Emociones",
+            description = "La diversidad de emociones grabadas",
             value = emotionDiversity,
-            updatedAt = "2023-04-01",
+            updatedAt = "2023-11-20",
         ),
     )
 }
@@ -147,7 +147,8 @@ val audiosPreview = listOf(
         duration = 433,
         path = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
         createdDate = System.currentTimeMillis().minus(1000 * 60 * 60 * 24),
-        emotion = Emotion.Angry,
+        emotion = Emotion.Anger,
+        id = UUID.randomUUID().toString(),
     ),
     Audio(
         extension = "mp3",
@@ -155,6 +156,7 @@ val audiosPreview = listOf(
         path = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
         createdDate = System.currentTimeMillis().minus(2000 * 60 * 60 * 24),
         emotion = Emotion.Disgust,
+        id = UUID.randomUUID().toString(),
     ),
     Audio(
         extension = "mp3",
@@ -162,6 +164,7 @@ val audiosPreview = listOf(
         path = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
         createdDate = System.currentTimeMillis().minus(3000 * 60 * 60 * 24),
         emotion = Emotion.Neutral,
+        id = UUID.randomUUID().toString(),
     ),
     Audio(
         extension = "mp3",
@@ -169,13 +172,15 @@ val audiosPreview = listOf(
         path = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3",
         createdDate = System.currentTimeMillis().minus(4000 * 60 * 60 * 24),
         emotion = Emotion.Happiness,
+        id = UUID.randomUUID().toString(),
     ),
     Audio(
         extension = "mp3",
         duration = 11,
         path = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3",
         createdDate = System.currentTimeMillis().minus(5000 * 60 * 60 * 24),
-        emotion = Emotion.Angry,
+        emotion = Emotion.Anger,
+        id = UUID.randomUUID().toString(),
     ),
     Audio(
         extension = "mp3",
@@ -183,6 +188,7 @@ val audiosPreview = listOf(
         path = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3",
         createdDate = System.currentTimeMillis().minus(6000 * 60 * 60 * 24),
         emotion = Emotion.Fear,
+        id = UUID.randomUUID().toString(),
     ),
     Audio(
         extension = "mp3",
@@ -190,6 +196,7 @@ val audiosPreview = listOf(
         path = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3",
         createdDate = System.currentTimeMillis().minus(1500 * 60 * 60 * 24),
         emotion = Emotion.Fear,
+        id = UUID.randomUUID().toString(),
     ),
     Audio(
         extension = "mp3",
@@ -197,12 +204,14 @@ val audiosPreview = listOf(
         path = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3",
         createdDate = System.currentTimeMillis().minus(2500 * 60 * 60 * 24),
         emotion = Emotion.Disgust,
+        id = UUID.randomUUID().toString(),
     ),
     Audio(
         extension = "wav",
         duration = 1000,
         path = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3",
         createdDate = System.currentTimeMillis().minus(3500 * 60 * 60 * 24),
-        emotion = Emotion.Angry,
+        emotion = Emotion.Anger,
+        id = UUID.randomUUID().toString(),
     ),
 )

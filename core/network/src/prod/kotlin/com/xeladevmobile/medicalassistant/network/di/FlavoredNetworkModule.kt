@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.google.samples.apps.nowinandroid.core.network.di
+package com.xeladevmobile.medicalassistant.network.di
 
-import com.google.samples.apps.nowinandroid.core.network.NiaNetworkDataSource
-import com.google.samples.apps.nowinandroid.core.network.retrofit.RetrofitNiaNetwork
+import com.xeladevmobile.core.network.MedicalNetworkDataSource
+import com.xeladevmobile.core.network.retrofit.RetrofitMedicalNetwork
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -28,5 +28,5 @@ import dagger.hilt.components.SingletonComponent
 interface FlavoredNetworkModule {
 
     @Binds
-    fun binds(impl: RetrofitNiaNetwork): NiaNetworkDataSource
+    fun binds(impl: RetrofitMedicalNetwork): MedicalNetworkDataSource
 }

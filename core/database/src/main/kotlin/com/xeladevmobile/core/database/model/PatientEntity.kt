@@ -16,7 +16,7 @@ data class PatientEntity(
     @ColumnInfo(name = "diagnosis_description")
     val diagnosisDescription: String,
     @ColumnInfo(name = "treatment_date")
-    val treatmentDate: Long,
+    val treatmentDate: String,
     val address: String,
 )
 

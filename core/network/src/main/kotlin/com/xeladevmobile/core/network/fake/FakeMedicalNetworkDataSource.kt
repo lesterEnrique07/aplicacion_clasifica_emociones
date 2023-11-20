@@ -24,6 +24,7 @@ import com.xeladevmobile.core.network.model.NetworkSimplePrediction
 import com.xeladevmobile.medicalassistant.core.network.Dispatcher
 import com.xeladevmobile.medicalassistant.core.network.MedicalDispatchers.*
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
@@ -39,7 +40,6 @@ class FakeMedicalNetworkDataSource @Inject constructor(
     private val networkJson: Json,
     private val assets: FakeAssetManager = JvmUnitTestFakeAssetManager,
 ) : MedicalNetworkDataSource {
-
 
     companion object {
         private const val PATIENTS_ASSET = "patients.json"
@@ -57,10 +57,12 @@ class FakeMedicalNetworkDataSource @Inject constructor(
             assets.open(PATIENTS_ASSET).use(networkJson::decodeFromStream)
         }
 
-    @OptIn(ExperimentalSerializationApi::class)
     override suspend fun predictEmotion(file: File): NetworkSimplePrediction =
         withContext(ioDispatcher) {
-            assets.open(PATIENTS_ASSET).use(networkJson::decodeFromStream)
+            delay(2000)
+            NetworkSimplePrediction(
+                prediction = "Happiness",
+            )
         }
 
     @OptIn(ExperimentalSerializationApi::class)

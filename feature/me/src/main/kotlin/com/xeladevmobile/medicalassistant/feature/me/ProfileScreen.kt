@@ -14,11 +14,13 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AssuredWorkload
-import androidx.compose.material.icons.filled.Directions
-import androidx.compose.material.icons.filled.PersonOutline
+import androidx.compose.material.icons.filled.Cake
+import androidx.compose.material.icons.filled.CalendarToday
+import androidx.compose.material.icons.filled.Description
+import androidx.compose.material.icons.filled.Female
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.School
 import androidx.compose.material.icons.filled.WorkOutline
 import androidx.compose.material.icons.filled.WorkspacePremium
@@ -38,10 +40,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -51,10 +52,10 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.xeladevmobile.medicalassistant.core.designsystem.theme.LocalTintTheme
 import com.xeladevmobile.medicalassistant.core.designsystem.theme.MedicalTheme
-import com.xeladevmobile.medicalassistant.core.model.data.DarkThemeConfig
-import com.xeladevmobile.medicalassistant.core.model.data.ThemeBrand
 import com.xeladevmobile.medicalassistant.core.model.data.UserData
 import com.xeladevmobile.medicalassistant.core.model.data.UserType
+import com.xeladevmobile.medicalassistant.core.model.data.doctorUserData
+import com.xeladevmobile.medicalassistant.core.model.data.patientUserData
 
 @Composable
 internal fun ProfileScreenRoute(
@@ -88,126 +89,205 @@ fun ProfileScreen(
                 Column(
                     modifier = Modifier.padding(16.dp),
                 ) {
-                    Text(
-                        text = "Personal Details",
-                        fontStyle = FontStyle.Italic,
-                        fontSize = 32.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.onBackground,
-                        modifier = Modifier
-                            .padding(16.dp),
-                    )
-
-                    Card(
-                        modifier = Modifier
-                            .fillMaxWidth(),
-                        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-                    ) {
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(16.dp),
-                            horizontalArrangement = Arrangement.SpaceBetween,
-                            verticalAlignment = Alignment.CenterVertically,
-                        ) {
-                            Column(
-                                modifier = Modifier
-                                    .weight(0.5f),
-                            ) {
-                                Text(text = uiState.user.name, fontWeight = FontWeight.Bold, fontSize = 18.sp)
-
-                                Row(
-                                    verticalAlignment = Alignment.CenterVertically,
-                                    horizontalArrangement = Arrangement.spacedBy(10.dp),
-                                ) {
-                                    Icon(
-                                        imageVector = Icons.Default.AssuredWorkload,
-                                        contentDescription = "Graduation Date",
-                                    )
-                                    Text(text = "Date of Birth: ${uiState.user.bornDate}")
-                                }
-
-                                Row(
-                                    verticalAlignment = Alignment.CenterVertically,
-                                    horizontalArrangement = Arrangement.spacedBy(10.dp),
-                                ) {
-                                    Icon(imageVector = Icons.Default.School, contentDescription = "Graduation Date")
-                                    Text(text = "Graduation: ${uiState.user.graduationDate}")
-                                }
-
-                                Row(
-                                    verticalAlignment = Alignment.CenterVertically,
-                                    horizontalArrangement = Arrangement.spacedBy(10.dp),
-                                ) {
-                                    Icon(imageVector = Icons.Default.WorkOutline, contentDescription = "Work Icon")
-                                    Text(text = uiState.user.occupation)
-                                }
-
-                                Row(
-                                    verticalAlignment = Alignment.CenterVertically,
-                                    horizontalArrangement = Arrangement.spacedBy(10.dp),
-                                ) {
-                                    Icon(imageVector = Icons.Default.WorkspacePremium, contentDescription = "Work Icon")
-                                    Text(text = uiState.user.specialty)
-                                }
-                            }
-
-                            Image(
-                                painter = painterResource(id = R.drawable.ic_person_placeholder),
-                                contentDescription = "Picture",
-                                modifier = Modifier.size(100.dp),
-                            )
-                        }
-                    }
+                    UserCommonInfoCard(user = uiState.user)
 
                     Spacer(modifier = Modifier.height(20.dp))
 
-                    Card(
-                        modifier = Modifier
-                            .fillMaxWidth(),
-                        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-                    ) {
-                        Column(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(16.dp),
-                        ) {
-                            Text(text = "Experience", fontWeight = FontWeight.Bold, fontSize = 18.sp)
-
-                            Spacer(modifier = Modifier.size(8.dp))
-
-                            Row(
-                                verticalAlignment = Alignment.CenterVertically,
-                                horizontalArrangement = Arrangement.spacedBy(10.dp),
-                            ) {
-                                Icon(
-                                    imageVector = Icons.Default.PersonOutline,
-                                    contentDescription = "Sex",
-                                )
-                                Text(text = "Sex: ${uiState.user.sex}")
-                            }
-
-                            Row(
-                                verticalAlignment = Alignment.CenterVertically,
-                                horizontalArrangement = Arrangement.spacedBy(10.dp),
-                            ) {
-                                Icon(
-                                    imageVector = Icons.Default.Directions,
-                                    contentDescription = "Address",
-                                )
-                                Text(text = "Address: ${uiState.user.address}")
-                            }
-
-                            Spacer(modifier = Modifier.height(20.dp))
-
-                            ExperienceTextAnimated(
-                                years = uiState.user.experience,
-                            )
-                        }
+                    if (uiState.user.userType == UserType.PATIENT) {
+                        PatientInfoCard(patient = uiState.user)
+                    } else if (uiState.user.userType == UserType.DOCTOR) {
+                        DoctorInfoCard(doctor = uiState.user)
                     }
-
-                    Spacer(modifier = Modifier.height(20.dp))
                 }
+            }
+        }
+    }
+}
+
+@Composable
+fun DoctorInfoCard(doctor: UserData) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth(),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+        ) {
+            Text(
+                text = stringResource(R.string.doctor_information),
+                fontSize = 32.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.onBackground,
+                modifier = Modifier
+                    .padding(16.dp),
+            )
+
+            Spacer(modifier = Modifier.height(8.dp))
+
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(10.dp),
+            ) {
+                Icon(
+                    imageVector = Icons.Default.WorkOutline,
+                    contentDescription = stringResource(R.string.occupation),
+                )
+                Text(text = stringResource(R.string.occupation_content, doctor.occupation))
+            }
+
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(10.dp),
+            ) {
+                Icon(
+                    imageVector = Icons.Default.School,
+                    contentDescription = stringResource(id = R.string.graduation_date),
+                )
+                Text(text = stringResource(id = R.string.graduation, doctor.graduationDate))
+            }
+
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(10.dp),
+            ) {
+                Icon(
+                    imageVector = Icons.Default.WorkspacePremium,
+                    contentDescription = stringResource(R.string.specialty_description),
+                )
+                Text(text = stringResource(R.string.specialty, doctor.specialty))
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            ExperienceTextAnimated(
+                years = doctor.experience,
+            )
+        }
+    }
+}
+
+@Composable
+fun PatientInfoCard(patient: UserData) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth(),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+        ) {
+            Text(
+                text = stringResource(R.string.patient_information),
+                fontSize = 32.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.onBackground,
+                modifier = Modifier
+                    .padding(16.dp),
+            )
+
+            Spacer(modifier = Modifier.height(8.dp))
+
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(10.dp),
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Description,
+                    contentDescription = stringResource(R.string.problem_description),
+                )
+                Text(text = stringResource(R.string.problem, patient.problemDescription))
+            }
+
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(10.dp),
+            ) {
+                Icon(
+                    imageVector = Icons.Default.CalendarToday,
+                    contentDescription = stringResource(
+                        R.string.treatment_date,
+                        patient.treatmentDate,
+                    ),
+                )
+                Text(text = stringResource(R.string.treatment_date, patient.treatmentDate))
+            }
+        }
+    }
+}
+
+@Composable
+fun UserCommonInfoCard(user: UserData) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth(),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+    ) {
+        Text(
+            text = stringResource(R.string.personal_details),
+            fontSize = 32.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.colorScheme.onBackground,
+            modifier = Modifier
+                .padding(16.dp),
+        )
+
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+        ) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(10.dp),
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Person,
+                    contentDescription = stringResource(
+                        id = R.string.name,
+                    ),
+                )
+                Text(text = stringResource(id = R.string.name, user.name))
+            }
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(10.dp),
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Cake,
+                    contentDescription = stringResource(
+                        id = R.string.date_of_birth,
+                    ),
+                )
+                Text(text = stringResource(id = R.string.date_of_birth, user.bornDate))
+            }
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(10.dp),
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Female,
+                    contentDescription = stringResource(
+                        id = R.string.sex,
+                    ),
+                )
+                Text(text = stringResource(id = R.string.sex, user.sex))
+            }
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(10.dp),
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Home,
+                    contentDescription = stringResource(
+                        id = R.string.address_content_description,
+                    ),
+                )
+                Text(text = stringResource(id = R.string.address, user.address))
             }
         }
     }
@@ -295,7 +375,7 @@ internal fun ExperienceTextAnimated(
                 .fillMaxWidth(),
             text = years,
             textAlign = TextAlign.Center,
-            fontSize = with(LocalDensity.current) { 64.sp * scale },
+            fontSize = 64.sp * scale,
             color = iconTint ?: MaterialTheme.colorScheme.primary,
         )
 
@@ -331,24 +411,28 @@ fun ProfileSuccessPreview() {
     MedicalTheme {
         ProfileScreen(
             uiState = ProfileUiState.Success(
-                UserData(
-                    darkThemeConfig = DarkThemeConfig.DARK,
-                    shouldHideOnboarding = true,
-                    themeBrand = ThemeBrand.ANDROID,
-                    useDynamicColor = false,
-                    address = "123 Main St",
-                    bornDate = "01/01/1990",
-                    experience = "10",
-                    graduationDate = "01/01/2010",
-                    name = "Jane Doe",
-                    occupation = "Doctor",
-                    sex = "Feminine",
-                    problemDescription = "",
-                    specialty = "Cardiologist",
-                    treatmentDate = "",
-                    userType = UserType.DOCTOR,
-                ),
+                doctorUserData,
             ),
+        )
+    }
+}
+
+@Preview
+@Composable
+fun ProfilePatientInfoCardPreview() {
+    MedicalTheme {
+        PatientInfoCard(
+            patientUserData,
+        )
+    }
+}
+
+@Preview
+@Composable
+fun ProfileDoctorInfoCardPreview() {
+    MedicalTheme {
+        DoctorInfoCard(
+            doctorUserData,
         )
     }
 }
