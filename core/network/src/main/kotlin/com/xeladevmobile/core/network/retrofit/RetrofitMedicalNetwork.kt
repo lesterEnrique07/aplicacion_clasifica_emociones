@@ -26,7 +26,7 @@ import kotlinx.serialization.json.Json
 import okhttp3.Call
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import retrofit2.Retrofit
 import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.http.Multipart
@@ -37,7 +37,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 /**
- * Retrofit API declaration for NIA Network API
+ * Retrofit API declaration for Medical Network API
  */
 private interface RetrofitNiaNetworkApi {
     @Multipart
@@ -113,10 +113,7 @@ class RetrofitMedicalNetwork @Inject constructor(
     }
 
     private fun File.toMultipartBodyPart(): MultipartBody.Part {
-        val requestFile = RequestBody.create(
-            "audio/*".toMediaType(),
-            this,
-        )
+        val requestFile = this.asRequestBody("audio/*".toMediaType())
         return MultipartBody.Part.createFormData(
             "file",
             name,

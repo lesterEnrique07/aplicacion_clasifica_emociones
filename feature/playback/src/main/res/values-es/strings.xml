@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="playback_audio">Reproduce tu grabación</string>
+    <string name="back">Atrás\n</string>
+    <string name="loading">Cargando</string>
+    <string name="emotion_detected">Emoción detectada: %1$s</string>
+    <string name="audio_file_details">Detalles del archivo de audio</string>
+    <string name="audio_file_details_description">Toda la información del audio será mostrada acá. Dicha información
+        es necesaria para nuestro análisis.\nSi el audio no se ha analizado y retorna, el progreso actual no se salvará.
+    </string>
+    <string name="audio_name">• Nombre: %1$s</string>
+    <string name="audio_extension">• Extensión: %1$s</string>
+    <string name="audio_duration">• Duración: %1$s</string>
+    <string name="audio_quality">• Calidad: %1$s</string>
+    <string name="audio_record_date">• Fecha de grabación: %1$s</string>
+    <string name="audio_size">• Tamaño: %1$s</string>
+    <string name="analyzing_audio">Estamos analizando el audio, por favor espere…</string>
+    <string name="continue_">Continuar</string>
+    <string name="analyze_recording">Analizar Grabación</string>
+</resources>

@@ -14,9 +14,8 @@
  * limitations under the License.
  */
 
-package com.google.samples.apps.nowinandroid.core.datastore
+package com.xeladevmobile.medicalassistant.core.datastore
 
-import com.xeladevmobile.medicalassistant.core.datastore.MedicalPreferencesDataSource
 import com.xeladevmobile.medicalassistant.core.datastore.test.testUserPreferencesDataStore
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.TestScope
@@ -60,11 +59,9 @@ class MedicalPreferencesDataSourceTest {
     fun userShouldHideOnboarding_unfollowsLastTopic_shouldHideOnboardingIsFalse() =
         testScope.runTest {
             // Given: user completes onboarding by selecting a single topic.
-            subject.setTopicIdFollowed("1", true)
             subject.setShouldHideOnboarding(true)
 
             // When: they unfollow that topic.
-            subject.setTopicIdFollowed("1", false)
 
             // Then: onboarding should be shown again
             assertFalse(subject.userData.first().shouldHideOnboarding)
@@ -74,11 +71,9 @@ class MedicalPreferencesDataSourceTest {
     fun userShouldHideOnboarding_unfollowsAllTopics_shouldHideOnboardingIsFalse() =
         testScope.runTest {
             // Given: user completes onboarding by selecting several topics.
-            subject.setFollowedTopicIds(setOf("1", "2"))
             subject.setShouldHideOnboarding(true)
 
             // When: they unfollow those topics.
-            subject.setFollowedTopicIds(emptySet())
 
             // Then: onboarding should be shown again
             assertFalse(subject.userData.first().shouldHideOnboarding)

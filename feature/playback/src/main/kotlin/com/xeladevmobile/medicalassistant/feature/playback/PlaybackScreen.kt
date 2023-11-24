@@ -149,7 +149,7 @@ internal fun PlaybackScreen(
     }
 }
 
-@Preview(showBackground = true)
+@Preview(showBackground = true, locale = "es")
 @Composable
 fun PlaybackScreenPreview() {
     PlaybackScreen(
@@ -162,7 +162,7 @@ fun PlaybackScreenPreview() {
             name = "recording_1",
             extension = "3gp",
             duration = 1000,
-            quality = "Good",
+            quality = "Buena",
             recordDate = "20230901T211833.000Z",
             size = 1000000,
         ),
@@ -216,7 +216,7 @@ fun AnalyzeAndEmotionLayout(
                 onClick = onAnalyzeClicked,
                 modifier = Modifier.padding(16.dp),
             ) {
-                Text("Analyze Recording")
+                Text(stringResource(R.string.analyze_recording))
             }
         }
     }
@@ -515,7 +515,7 @@ fun AudioFileDetailsCardWithEmotionPreview() {
             name = "recording_1",
             extension = "3gp",
             duration = 1000,
-            quality = "Good",
+            quality = "Buena",
             recordDate = "20230901T211833.000Z",
             size = 1000,
         ),

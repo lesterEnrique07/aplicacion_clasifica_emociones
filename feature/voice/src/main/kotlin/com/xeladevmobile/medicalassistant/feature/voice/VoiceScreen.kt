@@ -131,7 +131,7 @@ fun MicrophonePermissionRequest(
         Spacer(modifier = Modifier.height(16.dp))
 
         Text(
-            "To record your voice, we need access to your microphone.",
+            stringResource(R.string.record_voice_permission),
             textAlign = TextAlign.Center,
             style = MaterialTheme.typography.bodyLarge,
         )
@@ -160,7 +160,7 @@ fun Modifier.animateMicPermissionIcon() = composed {
     scale(scale)
 }
 
-@Preview(showBackground = true)
+@Preview(showBackground = true, locale = "es")
 @Composable
 fun MicrophonePermissionRequestPreview() {
     MedicalTheme {
@@ -272,7 +272,7 @@ internal fun VoiceScreen(
         Spacer(modifier = Modifier.weight(0.2f))
 
         Text(
-            "The stop recording button will automatically save your current recording.",
+            stringResource(R.string.stop_recording_note),
             textAlign = TextAlign.Center,
             modifier = Modifier
                 .fillMaxWidth()
@@ -291,7 +291,7 @@ internal fun VoiceScreen(
             ) {
                 RecordingAnimation()
                 Spacer(modifier = Modifier.width(8.dp))
-                Text("Recording...")
+                Text(stringResource(R.string.recording))
             }
         }
 
@@ -343,7 +343,7 @@ fun RecordingAnimation() {
     )
 }
 
-@Preview(showBackground = true)
+@Preview(showBackground = true, locale = "es")
 @Composable
 private fun VoiceScreenPreview() {
     VoiceScreen(

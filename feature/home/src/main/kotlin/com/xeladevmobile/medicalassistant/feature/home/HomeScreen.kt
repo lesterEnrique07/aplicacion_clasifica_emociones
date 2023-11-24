@@ -192,25 +192,6 @@ internal fun InitRecordCard(userData: UserData?, image: String, onStartRecording
             )
 
             Row {
-                Image(
-                    painter = rememberAsyncImagePainter(
-                        ImageRequest.Builder(LocalContext.current).data(data = image).apply(
-                            block = fun ImageRequest.Builder.() {
-                                crossfade(true)
-                                transformations(CircleCropTransformation())
-                            },
-                        ).build(),
-                        placeholder = painterResource(id = R.drawable.ic_person_placeholder),
-                        error = painterResource(id = R.drawable.ic_person_placeholder),
-                    ),
-                    contentDescription = null,
-                    modifier = Modifier
-                        .size(48.dp)
-                        .padding(start = 16.dp)
-                        .align(Alignment.CenterVertically)
-                        .clip(CircleShape),
-                )
-
                 Spacer(Modifier.weight(1f))
 
                 Button(
@@ -236,7 +217,7 @@ internal fun InitRecordCardPreview() {
     }
 }
 
-@Preview(showBackground = true)
+@DevicePreviews
 @Composable
 internal fun HomeScreenContentPreview() {
     MedicalTheme {
@@ -309,7 +290,7 @@ internal fun StatisticsCard(statistics: PatientStatistics) {
                 )
 
                 Text(
-                    text = "Updated at ${statistics.updatedAt}",
+                    text = stringResource(R.string.updated_at, statistics.updatedAt),
                     style = typography.bodySmall,
                     modifier = Modifier
                         .fillMaxWidth()

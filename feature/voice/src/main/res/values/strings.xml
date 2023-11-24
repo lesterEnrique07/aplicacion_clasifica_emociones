@@ -2,4 +2,7 @@
 <resources>
     <string name="back">Back</string>
     <string name="record_your_voice">Record your voice</string>
+    <string name="record_voice_permission">To record your voice, we need access to your microphone.</string>
+    <string name="stop_recording_note">The stop recording button will automatically save your current recording.</string>
+    <string name="recording">Recording...</string>
 </resources>

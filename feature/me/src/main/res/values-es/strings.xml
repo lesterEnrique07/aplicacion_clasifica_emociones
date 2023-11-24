@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="profile">Perfil</string>
+    <string name="graduation">Graduación: %1$s</string>
+    <string name="date_of_birth">Fecha de nacimiento: %1$s</string>
+    <string name="graduation_date">Fecha de graduación</string>
+    <string name="work_icon">Icono de Trabajo</string>
+    <string name="picture">Foto</string>
+    <string name="experience">Experiencia</string>
+    <string name="sex">Sexo: %1$s</string>
+    <string name="address">Dirección: %1$s</string>
+    <string name="address_content_description">Dirección</string>
+    <string name="personal_details">Detalles personales</string>
+    <string name="name">Nombre %1$s</string>
+    <string name="treatment_date">Fecha del tratamiento: %1$s</string>
+    <string name="problem">Problema: %1$s</string>
+    <string name="problem_description">Descripción del problema</string>
+    <string name="doctor_information">Información del doctor</string>
+    <string name="occupation">Ocupación</string>
+    <string name="occupation_content">Ocupación: %1$s</string>
+    <string name="specialty">Especialidad: %1$s</string>
+    <string name="specialty_description">Especialidad</string>
+    <string name="patient_information">Información del paciente</string>
+</resources>

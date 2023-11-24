@@ -16,10 +16,10 @@
 
 package com.xeladevmobile.medicalassistant.feature.settings
 
-import com.google.samples.apps.nowinandroid.core.model.data.DarkThemeConfig.DARK
-import com.google.samples.apps.nowinandroid.core.model.data.ThemeBrand.ANDROID
-import com.google.samples.apps.nowinandroid.core.testing.repository.TestUserDataRepository
-import com.google.samples.apps.nowinandroid.core.testing.util.MainDispatcherRule
+import com.xeladevmobile.medicalassistant.core.model.data.DarkThemeConfig.DARK
+import com.xeladevmobile.medicalassistant.core.model.data.ThemeBrand.ANDROID
+import com.xeladevmobile.medicalassistant.core.testing.repository.TestUserDataRepository
+import com.xeladevmobile.medicalassistant.core.testing.util.MainDispatcherRule
 import com.xeladevmobile.medicalassistant.feature.settings.SettingsUiState.Loading
 import com.xeladevmobile.medicalassistant.feature.settings.SettingsUiState.Success
 import kotlinx.coroutines.flow.collect

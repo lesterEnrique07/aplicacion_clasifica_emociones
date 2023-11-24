@@ -17,4 +17,5 @@
     <string name="audio_size">• Size: %1$s</string>
     <string name="analyzing_audio">We are analyzing your recording, please wait…</string>
     <string name="continue_">Continue</string>
+    <string name="analyze_recording">Analyze Recording</string>
 </resources>

@@ -16,6 +16,7 @@
 
 package com.xeladevmobile.medicalassistant.core.data.testdoubles
 
+import com.xeladevmobile.core.network.MedicalNetworkDataSource
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.serialization.json.Json
@@ -28,7 +29,7 @@ enum class CollectionType {
 /**
  * Test double for [NiaNetworkDataSource]
  */
-class TestMedicalAssistNetworkDataSource : NiaNetworkDataSource {
+class TestMedicalAssistNetworkDataSource : MedicalNetworkDataSource {
 
     private val source = FakeNiaNetworkDataSource(
         UnconfinedTestDispatcher(),

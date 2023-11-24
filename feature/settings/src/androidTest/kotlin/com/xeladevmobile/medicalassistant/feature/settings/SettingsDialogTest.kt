@@ -20,9 +20,9 @@ import androidx.activity.ComponentActivity
 import androidx.compose.ui.test.assertIsSelected
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithText
-import com.google.samples.apps.nowinandroid.core.model.data.DarkThemeConfig.DARK
-import com.google.samples.apps.nowinandroid.core.model.data.ThemeBrand.ANDROID
-import com.google.samples.apps.nowinandroid.core.model.data.ThemeBrand.DEFAULT
+import com.xeladevmobile.medicalassistant.core.model.data.DarkThemeConfig.DARK
+import com.xeladevmobile.medicalassistant.core.model.data.ThemeBrand.ANDROID
+import com.xeladevmobile.medicalassistant.core.model.data.ThemeBrand.DEFAULT
 import com.xeladevmobile.medicalassistant.feature.settings.SettingsUiState.Loading
 import com.xeladevmobile.medicalassistant.feature.settings.SettingsUiState.Success
 import org.junit.Rule

@@ -22,6 +22,7 @@ import com.xeladevmobile.medicalassistant.core.datastore.test.testUserPreference
 import com.xeladevmobile.medicalassistant.core.model.data.DarkThemeConfig
 import com.xeladevmobile.medicalassistant.core.model.data.ThemeBrand
 import com.xeladevmobile.medicalassistant.core.model.data.UserData
+import com.xeladevmobile.medicalassistant.core.model.data.UserType
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.test.TestScope
@@ -69,6 +70,19 @@ class OfflineFirstUserDataRepositoryTest {
                     darkThemeConfig = DarkThemeConfig.FOLLOW_SYSTEM,
                     useDynamicColor = false,
                     shouldHideOnboarding = false,
+                    address = "",
+                    bornDate = "",
+                    experience = "",
+                    graduationDate = "",
+                    name = "",
+                    sex = "",
+                    problemDescription = "",
+                    specialty = "",
+                    treatmentDate = "",
+                    userType = UserType.PATIENT,
+                    patientId = "",
+                    doctorId = "",
+                    occupation = "",
                 ),
                 subject.userData.first(),
             )

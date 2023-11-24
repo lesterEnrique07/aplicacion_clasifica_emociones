@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="home">Inicio</string>
+    <string name="welcome_to_medical_assistant">Bienvenido a tu asistente médico%1$s</string>
+    <string name="we_are_loading_your_data">. Estamos cargando tu información.</string>
+    <string name="start_recording_your_audio">Comienza grabando tu voz</string>
+    <string name="start_recording_description">Pulsa el botón de abajo para iniciar la grabación. Todos los registros son completamente privados y se almacenarán en su dispositivo.</string>
+    <string name="start_recording">Comenzar a grabar</string>
+    <string name="updated_at">Actualizado el %1$s</string>
+</resources>

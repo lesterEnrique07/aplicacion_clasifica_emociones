@@ -6,4 +6,5 @@
     <string name="start_recording_your_audio">Start recording your audio</string>
     <string name="start_recording_description">Press the button below to start recording. All records are completely private and will be stored in your device.</string>
     <string name="start_recording">Start recording</string>
+    <string name="updated_at">Updated at %1$s</string>
 </resources>
