@@ -20,18 +20,14 @@ package com.xeladevmobile.medicalassistant.feature.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.xeladevmobile.core.network.model.networkUserForTestWithDoctor
-import com.xeladevmobile.core.network.model.networkUserForTestWithPatient
 import com.xeladevmobile.medicalassistant.core.data.model.asUserData
 import com.xeladevmobile.medicalassistant.core.data.repository.UserDataRepository
 import com.xeladevmobile.medicalassistant.core.domain.InsertPatientUseCase
+import com.xeladevmobile.medicalassistant.core.network.model.networkUserForTestWithDoctor
+import com.xeladevmobile.medicalassistant.core.network.model.networkUserForTestWithPatient
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

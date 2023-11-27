@@ -14,15 +14,16 @@
  * limitations under the License.
  */
 
-package com.xeladevmobile.core.network.fake
+package com.xeladevmobile.medicalassistant.core.network.fake
 
 import JvmUnitTestFakeAssetManager
 import com.google.samples.apps.nowinandroid.core.network.fake.FakeAssetManager
-import com.xeladevmobile.core.network.MedicalNetworkDataSource
-import com.xeladevmobile.core.network.model.NetworkDetailedResponse
-import com.xeladevmobile.core.network.model.NetworkSimplePrediction
-import com.xeladevmobile.medicalassistant.core.network.Dispatcher
-import com.xeladevmobile.medicalassistant.core.network.MedicalDispatchers.*
+import com.xeladevmobile.medicalassistant.core.common.network.Dispatcher
+import com.xeladevmobile.medicalassistant.core.common.network.MedicalDispatchers.IO
+import com.xeladevmobile.medicalassistant.core.common.result.Result
+import com.xeladevmobile.medicalassistant.core.network.MedicalNetworkDataSource
+import com.xeladevmobile.medicalassistant.core.network.model.NetworkDetailedResponse
+import com.xeladevmobile.medicalassistant.core.network.model.NetworkSimplePrediction
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
@@ -46,27 +47,28 @@ class FakeMedicalNetworkDataSource @Inject constructor(
     }
 
     @OptIn(ExperimentalSerializationApi::class)
-    override suspend fun predictGender(file: File): NetworkSimplePrediction =
+    override suspend fun predictGender(file: File): Result<NetworkSimplePrediction> = withContext(ioDispatcher) {
+        assets.open(PATIENTS_ASSET).use(networkJson::decodeFromStream)
+    }
+
+    @OptIn(ExperimentalSerializationApi::class)
+    override suspend fun predictGenderPercents(file: File): Result<NetworkDetailedResponse> =
         withContext(ioDispatcher) {
             assets.open(PATIENTS_ASSET).use(networkJson::decodeFromStream)
         }
 
-    @OptIn(ExperimentalSerializationApi::class)
-    override suspend fun predictGenderPercents(file: File): NetworkDetailedResponse =
-        withContext(ioDispatcher) {
-            assets.open(PATIENTS_ASSET).use(networkJson::decodeFromStream)
-        }
-
-    override suspend fun predictEmotion(file: File): NetworkSimplePrediction =
-        withContext(ioDispatcher) {
-            delay(2000)
-            NetworkSimplePrediction(
-                prediction = "Happiness",
-            )
-        }
+    override suspend fun predictEmotion(file: File): Result<NetworkSimplePrediction> = withContext(ioDispatcher) {
+        delay(2000)
+        throw Exception("Error")
+//        Result.Success(
+//            NetworkSimplePrediction(
+//                prediction = "Happiness",
+//            ),
+//        )
+    }
 
     @OptIn(ExperimentalSerializationApi::class)
-    override suspend fun predictEmotionPercents(file: File): NetworkDetailedResponse =
+    override suspend fun predictEmotionPercents(file: File): Result<NetworkDetailedResponse> =
         withContext(ioDispatcher) {
             assets.open(PATIENTS_ASSET).use(networkJson::decodeFromStream)
         }

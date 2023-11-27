@@ -1,9 +1,9 @@
 package com.xeladevmobile.medicalassistant.core.data.model
 
-import com.xeladevmobile.core.network.model.NetworkUser
 import com.xeladevmobile.medicalassistant.core.model.data.DarkThemeConfig
 import com.xeladevmobile.medicalassistant.core.model.data.ThemeBrand
 import com.xeladevmobile.medicalassistant.core.model.data.UserData
+import com.xeladevmobile.medicalassistant.core.network.model.NetworkUser
 
 fun NetworkUser.asUserData() = UserData(
     themeBrand = ThemeBrand.DEFAULT,

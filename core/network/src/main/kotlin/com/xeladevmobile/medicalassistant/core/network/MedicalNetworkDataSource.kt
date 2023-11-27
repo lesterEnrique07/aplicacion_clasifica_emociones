@@ -14,21 +14,23 @@
  * limitations under the License.
  */
 
-package com.xeladevmobile.core.network
+package com.xeladevmobile.medicalassistant.core.network
 
-import com.xeladevmobile.core.network.model.NetworkDetailedResponse
-import com.xeladevmobile.core.network.model.NetworkSimplePrediction
+import com.xeladevmobile.medicalassistant.core.common.result.Result
+import com.xeladevmobile.medicalassistant.core.network.model.NetworkDetailedResponse
+import com.xeladevmobile.medicalassistant.core.network.model.NetworkSimplePrediction
 import java.io.File
 
 /**
  * Interface representing network calls to the NIA backend
  */
 interface MedicalNetworkDataSource {
-    suspend fun predictGender(file: File): NetworkSimplePrediction
 
-    suspend fun predictGenderPercents(file: File): NetworkDetailedResponse
+    suspend fun predictGender(file: File): Result<NetworkSimplePrediction>
 
-    suspend fun predictEmotion(file: File): NetworkSimplePrediction
+    suspend fun predictGenderPercents(file: File): Result<NetworkDetailedResponse>
 
-    suspend fun predictEmotionPercents(file: File): NetworkDetailedResponse
+    suspend fun predictEmotion(file: File): Result<NetworkSimplePrediction>
+
+    suspend fun predictEmotionPercents(file: File): Result<NetworkDetailedResponse>
 }

@@ -130,19 +130,32 @@ internal fun PlaybackScreen(
 
         Spacer(modifier = Modifier.weight(1f))
 
-        if (uiState is PlaybackUiState.Analyzed) {
-            MedicalButton(onClick = onFinishClick) {
-                Text(text = stringResource(R.string.continue_))
+        when (uiState) {
+            is PlaybackUiState.Analyzed -> {
+                MedicalButton(onClick = onFinishClick) {
+                    Text(text = stringResource(R.string.continue_))
+                }
             }
-        } else {
-            // Playback controls in the center
-            PlaybackControls(
-                playbackState = uiState,
-                onPlayPauseClicked = onPlayPauseClick,
-                onStopClicked = onStopClick,
-                amplitudes = amplitudes,
-                playbackProgress = playbackProgress,
-            )
+
+            is PlaybackUiState.Error -> {
+                Text(
+                    text = stringResource(R.string.error_analyzing_audio),
+                    color = MaterialTheme.colorScheme.error,
+                    style = MaterialTheme.typography.bodyLarge,
+                    modifier = Modifier.padding(16.dp)
+                )
+            }
+
+            else -> {
+                // Playback controls in the center
+                PlaybackControls(
+                    playbackState = uiState,
+                    onPlayPauseClicked = onPlayPauseClick,
+                    onStopClicked = onStopClick,
+                    amplitudes = amplitudes,
+                    playbackProgress = playbackProgress,
+                )
+            }
         }
 
         Spacer(modifier = Modifier.weight(1f))
@@ -154,6 +167,30 @@ internal fun PlaybackScreen(
 fun PlaybackScreenPreview() {
     PlaybackScreen(
         uiState = PlaybackUiState.Playing,
+        onBackClick = {},
+        onPlayPauseClick = {},
+        onStopClick = {},
+        onAnalyzeClick = {},
+        audioDetails = AudioDetails(
+            name = "recording_1",
+            extension = "3gp",
+            duration = 1000,
+            quality = "Buena",
+            recordDate = "20230901T211833.000Z",
+            size = 1000000,
+        ),
+        isLoading = false,
+        amplitudes = listOf(10, 20, 15, 30, 25, 35, 40, 45, 30, 20, 10, 5),
+        playbackProgress = 0f,
+        onFinishClick = {},
+    )
+}
+
+@Preview(showBackground = true, locale = "es")
+@Composable
+fun PlaybackScreenErrorPreview() {
+    PlaybackScreen(
+        uiState = PlaybackUiState.Error,
         onBackClick = {},
         onPlayPauseClick = {},
         onStopClick = {},

@@ -24,8 +24,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.util.lerp
-import com.xeladevmobile.medicalassistant.core.formatCreatedDate
-import com.xeladevmobile.medicalassistant.core.formatDuration
+import com.xeladevmobile.medicalassistant.core.common.formatCreatedDate
+import com.xeladevmobile.medicalassistant.core.common.formatDuration
 import com.xeladevmobile.medicalassistant.core.model.data.Audio
 import com.xeladevmobile.medicalassistant.core.model.data.Emotion
 import com.xeladevmobile.medicalassistant.core.model.data.audiosPreview

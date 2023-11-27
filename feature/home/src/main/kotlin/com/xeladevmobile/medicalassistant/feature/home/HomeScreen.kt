@@ -3,36 +3,18 @@ package com.xeladevmobile.medicalassistant.feature.home
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.foundation.lazy.staggeredgrid.items
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Divider
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.*
 import androidx.compose.material3.MaterialTheme.typography
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.ParagraphStyle
 import androidx.compose.ui.text.SpanStyle
@@ -45,16 +27,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import coil.compose.rememberAsyncImagePainter
-import coil.request.ImageRequest
-import coil.transform.CircleCropTransformation
+import com.xeladevmobile.medicalassistant.core.common.formatDate
 import com.xeladevmobile.medicalassistant.core.designsystem.theme.MedicalTheme
 import com.xeladevmobile.medicalassistant.core.model.data.PatientStatistics
 import com.xeladevmobile.medicalassistant.core.model.data.UserData
 import com.xeladevmobile.medicalassistant.core.model.data.audiosPreview
-import com.xeladevmobile.medicalassistant.core.model.data.calculateStatistics
 import com.xeladevmobile.medicalassistant.core.model.data.patientUserData
 import com.xeladevmobile.medicalassistant.core.ui.DevicePreviews
+import java.util.*
 
 @Composable
 internal fun HomeScreenRoute(
@@ -89,7 +69,7 @@ internal fun HomeScreen(
         is HomeUiState.Success -> {
             HomeScreenContent(
                 modifier = modifier,
-                patientStatisticsList = uiState.audioRecords.calculateStatistics(),
+                patientStatisticsList = uiState.audioRecords.calculateStatistics(Locale.getDefault()),
                 userData = uiState.userData,
                 onStartRecordingClick = onStartRecordingClick,
             )
@@ -223,7 +203,7 @@ internal fun HomeScreenContentPreview() {
     MedicalTheme {
         HomeScreenContent(
             modifier = Modifier,
-            patientStatisticsList = audiosPreview.calculateStatistics(),
+            patientStatisticsList = audiosPreview.calculateStatistics(Locale.getDefault()),
             userData = patientUserData,
             onStartRecordingClick = { },
         )
@@ -290,7 +270,7 @@ internal fun StatisticsCard(statistics: PatientStatistics) {
                 )
 
                 Text(
-                    text = stringResource(R.string.updated_at, statistics.updatedAt),
+                    text = stringResource(R.string.updated_at, formatDate(statistics.updatedAt)),
                     style = typography.bodySmall,
                     modifier = Modifier
                         .fillMaxWidth()
@@ -311,7 +291,7 @@ internal fun StatisticsCardPreview() {
                 header = "Statistics",
                 description = "Statistics description with a very large text to check if the text is wrapped correctly",
                 value = "A really large and complex explication about the statistics",
-                updatedAt = "2021-09-01",
+                updatedAt = System.currentTimeMillis(),
             ),
         )
     }

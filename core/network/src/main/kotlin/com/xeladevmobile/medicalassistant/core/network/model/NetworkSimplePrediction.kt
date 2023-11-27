@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Medical Assistant
+ * Copyright 2022 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,16 +14,14 @@
  * limitations under the License.
  */
 
-package com.xeladevmobile.medicalassistant.core.network
+package com.xeladevmobile.medicalassistant.core.network.model
 
-import javax.inject.Qualifier
-import kotlin.annotation.AnnotationRetention.RUNTIME
+import kotlinx.serialization.Serializable
 
-@Qualifier
-@Retention(RUNTIME)
-annotation class Dispatcher(val niaDispatcher: MedicalDispatchers)
-
-enum class MedicalDispatchers {
-    Default,
-    IO,
-}
+/**
+ * Network representation of [Topic]
+ */
+@Serializable
+data class NetworkSimplePrediction(
+    val prediction: String,
+)

@@ -18,4 +18,5 @@
     <string name="analyzing_audio">We are analyzing your recording, please wait…</string>
     <string name="continue_">Continue</string>
     <string name="analyze_recording">Analyze Recording</string>
+    <string name="error_analyzing_audio">Error analyzing the audio. Please try again.</string>
 </resources>

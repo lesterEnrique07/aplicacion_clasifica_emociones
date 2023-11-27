@@ -16,8 +16,6 @@
 
 package com.xeladevmobile.medicalassistant.core.data.repository.fake
 
-import com.xeladevmobile.core.network.model.NetworkUser
-import com.xeladevmobile.core.network.model.networkUserForTestWithPatient
 import com.xeladevmobile.medicalassistant.core.data.repository.UserDataRepository
 import com.xeladevmobile.medicalassistant.core.datastore.MedicalPreferencesDataSource
 import com.xeladevmobile.medicalassistant.core.model.data.DarkThemeConfig

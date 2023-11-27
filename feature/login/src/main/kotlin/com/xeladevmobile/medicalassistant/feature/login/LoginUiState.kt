@@ -18,7 +18,7 @@
 
 package com.xeladevmobile.medicalassistant.feature.login
 
-import com.xeladevmobile.core.network.model.NetworkUser
+import com.xeladevmobile.medicalassistant.core.network.model.NetworkUser
 
 sealed interface LoginUiState {
     object Initial : LoginUiState

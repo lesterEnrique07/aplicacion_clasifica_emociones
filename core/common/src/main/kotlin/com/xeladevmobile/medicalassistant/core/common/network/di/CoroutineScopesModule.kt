@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.xeladevmobile.medicalassistant.core.network.di
+package com.xeladevmobile.medicalassistant.core.common.network.di
 
-import com.xeladevmobile.medicalassistant.core.network.Dispatcher
-import com.xeladevmobile.medicalassistant.core.network.MedicalDispatchers.Default
+import com.xeladevmobile.medicalassistant.core.common.network.Dispatcher
+import com.xeladevmobile.medicalassistant.core.common.network.MedicalDispatchers.Default
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

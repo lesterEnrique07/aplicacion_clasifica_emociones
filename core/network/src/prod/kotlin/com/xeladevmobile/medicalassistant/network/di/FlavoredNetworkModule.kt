@@ -16,8 +16,8 @@
 
 package com.xeladevmobile.medicalassistant.network.di
 
-import com.xeladevmobile.core.network.MedicalNetworkDataSource
-import com.xeladevmobile.core.network.retrofit.RetrofitMedicalNetwork
+import com.xeladevmobile.medicalassistant.core.network.MedicalNetworkDataSource
+import com.xeladevmobile.medicalassistant.core.network.retrofit.RetrofitMedicalNetwork
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

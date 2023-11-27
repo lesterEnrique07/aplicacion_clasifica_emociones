@@ -2,8 +2,8 @@ package com.xeladevmobile.medicalassistant.core.data.repository
 
 import com.xeladevmobile.core.database.dao.PatientDao
 import com.xeladevmobile.core.database.model.PatientEntity
-import com.xeladevmobile.core.network.MedicalNetworkDataSource
 import com.xeladevmobile.medicalassistant.core.model.data.UserData
+import com.xeladevmobile.medicalassistant.core.network.MedicalNetworkDataSource
 import javax.inject.Inject
 
 class OfflineFirstPatientRepository @Inject constructor(

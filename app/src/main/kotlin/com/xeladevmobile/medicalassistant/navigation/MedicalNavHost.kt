@@ -15,7 +15,7 @@ import com.xeladevmobile.medicalassistant.feature.login.navigation.loginGraph
 import com.xeladevmobile.medicalassistant.feature.me.navigation.profileScreen
 import com.xeladevmobile.medicalassistant.feature.playback.navigation.navigateToPlayRecordVoice
 import com.xeladevmobile.medicalassistant.feature.playback.navigation.playVoiceRecordScreen
-import com.xeladevmobile.medicalassistant.feature.records.navigation.recordsScreen
+import com.xeladevmobile.medicalassistant.feature.records.navigation.recordsGraph
 import com.xeladevmobile.medicalassistant.feature.records.navigation.recordsScreenRoute
 import com.xeladevmobile.medicalassistant.feature.voice.navigation.navigateToRecordVoice
 import com.xeladevmobile.medicalassistant.feature.voice.navigation.voiceRecordScreen
@@ -87,7 +87,12 @@ fun MedicalNavHost(
                 )
             },
         )
-        recordsScreen(onElementClicked = navController::navigateToPlayRecordVoice)
+        recordsGraph(
+            onElementClicked = navController::navigateToPlayRecordVoice,
+            nestedGraphs = {
+
+            },
+        )
         profileScreen()
     }
 }

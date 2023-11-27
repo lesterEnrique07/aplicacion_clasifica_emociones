@@ -20,13 +20,10 @@ import com.xeladevmobile.medicalassistant.feature.home.navigation.homeScreenRout
 import com.xeladevmobile.medicalassistant.feature.home.navigation.navigateToHomeGraph
 import com.xeladevmobile.medicalassistant.feature.me.navigation.navigateToProfile
 import com.xeladevmobile.medicalassistant.feature.me.navigation.profileScreenRoute
-import com.xeladevmobile.medicalassistant.feature.records.navigation.navigateToRecords
+import com.xeladevmobile.medicalassistant.feature.records.navigation.navigateToRecordsGraph
 import com.xeladevmobile.medicalassistant.feature.records.navigation.recordsScreenRoute
 import com.xeladevmobile.medicalassistant.navigation.TopLevelDestination
-import com.xeladevmobile.medicalassistant.navigation.TopLevelDestination.HOME
-import com.xeladevmobile.medicalassistant.navigation.TopLevelDestination.PROFILE
-import com.xeladevmobile.medicalassistant.navigation.TopLevelDestination.RECORDS
-import com.xeladevmobile.medicalassistant.navigation.TopLevelDestination.values
+import com.xeladevmobile.medicalassistant.navigation.TopLevelDestination.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.map
@@ -119,7 +116,7 @@ class MedicalAppState(
 
             when (topLevelDestination) {
                 HOME -> navController.navigateToHomeGraph(topLevelNavOptions)
-                RECORDS -> navController.navigateToRecords(topLevelNavOptions)
+                RECORDS -> navController.navigateToRecordsGraph(topLevelNavOptions)
                 PROFILE -> navController.navigateToProfile(topLevelNavOptions)
             }
         }

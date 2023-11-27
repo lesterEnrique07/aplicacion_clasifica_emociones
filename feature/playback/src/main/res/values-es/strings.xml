@@ -17,4 +17,5 @@
     <string name="analyzing_audio">Estamos analizando el audio, por favor espere…</string>
     <string name="continue_">Continuar</string>
     <string name="analyze_recording">Analizar Grabación</string>
+    <string name="error_analyzing_audio">Error al analizar el audio. Por favor, inténtalo de nuevo.</string>
 </resources>

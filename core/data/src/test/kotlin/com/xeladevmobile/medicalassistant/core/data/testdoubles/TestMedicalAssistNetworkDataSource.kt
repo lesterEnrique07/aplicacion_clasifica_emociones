@@ -16,7 +16,7 @@
 
 package com.xeladevmobile.medicalassistant.core.data.testdoubles
 
-import com.xeladevmobile.core.network.MedicalNetworkDataSource
+import com.xeladevmobile.medicalassistant.core.network.MedicalNetworkDataSource
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.serialization.json.Json

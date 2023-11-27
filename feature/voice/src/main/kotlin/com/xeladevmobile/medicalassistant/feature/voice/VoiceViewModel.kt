@@ -16,7 +16,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import java.io.File
-import java.util.UUID
+import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
@@ -42,8 +42,9 @@ class VoiceViewModel @Inject constructor() : ViewModel() {
         mediaRecorder = WaveRecorder(filePath!!).apply {
             waveConfig.sampleRate = 44100
             waveConfig.channels = AudioFormat.CHANNEL_IN_STEREO
-            waveConfig.audioEncoding = AudioFormat.ENCODING_PCM_8BIT
+            waveConfig.audioEncoding = AudioFormat.ENCODING_PCM_16BIT
         }
+        mediaRecorder?.noiseSuppressorActive = true
         mediaRecorder?.startRecording()
         startTimer()
         _uiState.emit(VoiceUiState.Recording)

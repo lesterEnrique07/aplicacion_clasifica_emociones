@@ -9,7 +9,8 @@ sealed interface PlaybackUiState {
     data object Playing : PlaybackUiState
     data object Paused : PlaybackUiState
     data object Loading : PlaybackUiState
-    data class AudioFileLoaded(val audio: Audio) : PlaybackUiState
+
+    data object Error : PlaybackUiState
 }
 
 val PlaybackUiState.isPlaying: Boolean

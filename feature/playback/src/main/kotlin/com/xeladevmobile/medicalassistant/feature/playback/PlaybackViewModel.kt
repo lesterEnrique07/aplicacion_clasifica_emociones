@@ -203,6 +203,10 @@ class PlaybackViewModel @Inject constructor(
         viewModelScope.launch {
             _uiState.emit(PlaybackUiState.Loading)
             val result = audioAnalyzeAudioRepository.analyzeAudio(filePath)
+            if(result == null) {
+                _uiState.emit(PlaybackUiState.Error)
+                return@launch
+            }
             userDataRepository.userData.collectLatest {
                 insertAudioUseCase(filePath, patientId = it.patientId, emotion = result)
                 _uiState.emit(PlaybackUiState.Analyzed(result))

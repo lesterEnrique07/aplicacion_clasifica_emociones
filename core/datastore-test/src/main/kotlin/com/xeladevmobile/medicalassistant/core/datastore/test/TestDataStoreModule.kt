@@ -18,10 +18,10 @@ package com.xeladevmobile.medicalassistant.core.datastore.test
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.core.DataStoreFactory
+import com.xeladevmobile.medicalassistant.core.common.network.di.ApplicationScope
 import com.xeladevmobile.medicalassistant.core.datastore.UserPreferences
 import com.xeladevmobile.medicalassistant.core.datastore.UserPreferencesSerializer
 import com.xeladevmobile.medicalassistant.core.datastore.di.DataStoreModule
-import com.xeladevmobile.medicalassistant.core.network.di.ApplicationScope
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.components.SingletonComponent

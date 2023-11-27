@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.xeladevmobile.medicalassistant.core.result
+package com.xeladevmobile.medicalassistant.core.common.result
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch

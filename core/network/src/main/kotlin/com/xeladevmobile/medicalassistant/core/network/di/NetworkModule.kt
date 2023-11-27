@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.xeladevmobile.core.network.di
+package com.xeladevmobile.medicalassistant.core.network.di
 
 import android.content.Context
 import coil.ImageLoader

@@ -1,4 +1,4 @@
-package com.xeladevmobile.core.network.model
+package com.xeladevmobile.medicalassistant.core.network.model
 
 data class NetworkDetailedResponse(
     val prediction: String,

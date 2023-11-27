@@ -16,8 +16,8 @@
 
 package com.xeladevmobile.medicalassistant.core.network.di
 
-import com.xeladevmobile.core.network.MedicalNetworkDataSource
-import com.xeladevmobile.core.network.fake.FakeMedicalNetworkDataSource
+import com.xeladevmobile.medicalassistant.core.network.MedicalNetworkDataSource
+import com.xeladevmobile.medicalassistant.core.network.fake.FakeMedicalNetworkDataSource
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

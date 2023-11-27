@@ -4,5 +4,5 @@ data class PatientStatistics(
     val header: String,
     val description: String,
     val value: String,
-    val updatedAt: String,
+    val updatedAt: Long,
 )

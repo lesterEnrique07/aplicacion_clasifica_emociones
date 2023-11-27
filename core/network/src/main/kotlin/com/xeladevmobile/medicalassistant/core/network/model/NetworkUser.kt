@@ -16,11 +16,11 @@
  * The software is available on Clover Market, soon to be available on Apple App Store and Google Play.
  */
 
-package com.xeladevmobile.core.network.model
+package com.xeladevmobile.medicalassistant.core.network.model
 
 import com.xeladevmobile.medicalassistant.core.model.data.UserType
 import kotlinx.serialization.Serializable
-import java.util.UUID
+import java.util.*
 
 @Serializable
 data class NetworkUser(
