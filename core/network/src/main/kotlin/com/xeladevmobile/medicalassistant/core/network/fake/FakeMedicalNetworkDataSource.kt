@@ -59,12 +59,12 @@ class FakeMedicalNetworkDataSource @Inject constructor(
 
     override suspend fun predictEmotion(file: File): Result<NetworkSimplePrediction> = withContext(ioDispatcher) {
         delay(2000)
-        throw Exception("Error")
-//        Result.Success(
-//            NetworkSimplePrediction(
-//                prediction = "Happiness",
-//            ),
-//        )
+        //throw Exception("Error")
+        Result.Success(
+            NetworkSimplePrediction(
+                prediction = "Happiness",
+            ),
+        )
     }
 
     @OptIn(ExperimentalSerializationApi::class)

@@ -27,8 +27,13 @@ import com.xeladevmobile.medicalassistant.core.network.model.networkUserForTestW
 import com.xeladevmobile.medicalassistant.core.network.model.networkUserForTestWithPatient
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
+import java.util.Locale
 import javax.inject.Inject
 
 @HiltViewModel
@@ -56,7 +61,14 @@ class LoginViewModel @Inject constructor(
                 insertPatientUseCase(networkUserForTestWithDoctor.asUserData())
                 _uiState.emit(LoginUiState.Success(networkUserData = networkUserForTestWithDoctor))
             } else {
-                _uiState.emit(LoginUiState.Error("Usuario o contraseña incorrectos"))
+                val currentLocale = Locale.getDefault()
+                val errorMessage = if (currentLocale.language == "es") {
+                    "Usuario o contraseña incorrectos"
+                } else {
+                    "Incorrect username or password"
+                }
+
+                _uiState.emit(LoginUiState.Error(errorMessage))
             }
         }
     }

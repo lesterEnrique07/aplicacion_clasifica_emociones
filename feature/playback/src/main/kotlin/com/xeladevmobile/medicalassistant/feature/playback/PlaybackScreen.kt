@@ -142,7 +142,7 @@ internal fun PlaybackScreen(
                     text = stringResource(R.string.error_analyzing_audio),
                     color = MaterialTheme.colorScheme.error,
                     style = MaterialTheme.typography.bodyLarge,
-                    modifier = Modifier.padding(16.dp)
+                    modifier = Modifier.padding(16.dp),
                 )
             }
 
@@ -345,7 +345,8 @@ fun AnimatedEmoji(emoji: String) {
         text = emoji,
         modifier = Modifier
             .graphicsLayer {
-                val scale = lerp(0.8f, 1f, animated.value)
+                val safeValue = animated.value.takeIf { !it.isNaN() } ?: 0f
+                val scale = lerp(0.8f, 1f, safeValue)
                 scaleX = scale
                 scaleY = scale
                 alpha = animated.value

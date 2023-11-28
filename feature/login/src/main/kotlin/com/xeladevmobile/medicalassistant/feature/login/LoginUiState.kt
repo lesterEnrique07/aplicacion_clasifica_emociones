@@ -21,8 +21,8 @@ package com.xeladevmobile.medicalassistant.feature.login
 import com.xeladevmobile.medicalassistant.core.network.model.NetworkUser
 
 sealed interface LoginUiState {
-    object Initial : LoginUiState
-    object Loading : LoginUiState
+    data object Initial : LoginUiState
+    data object Loading : LoginUiState
     data class Success(val networkUserData: NetworkUser) : LoginUiState
     data class Error(val message: String) : LoginUiState
 }
